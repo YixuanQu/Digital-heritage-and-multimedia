@@ -1,0 +1,464 @@
+:: StoryTitle
+The Secret Next Door v4 (5-Painting Edition)
+
+:: StoryData
+{
+  "ifid": "61D77317-38B1-4FD1-9B4D-1B5FC0A13728",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "P0StreetHook",
+  "zoom": 1
+}
+
+:: P0StreetHook {"position":"100,100","size":"160,120"}
+''SCREEN:'' //A street in the university quarter. Old posters on a stone wall. One poster shows a sad woman who looks up at the sky.//
+''MEDIA:'' //Photo of a real Bologna street + the painted woman on the poster. Faint street sounds. If you lift your phone, her eyes “breathe” (a soft, slow animation).//
+
+You walk down Via Zamboni, like you do every day.
+Students pass you with coffee and headphones. The walls are full of posters — concerts, rooms for rent, lost cats.
+But one poster makes you stop. It is old and faded. A woman is painted on it.
+She looks up at the sky, and she looks sad.
+Under her face, someone wrote one line by hand: “Everyone walks past me. Will you?”
+In the corner there is a small, sharp QR code. It does not belong on such old paper.
+What do you do?
+
+[[Lift your phone and scan the code.->P1Threshold]]
+[[Keep walking. You have somewhere to be.->P0Walkaway]]
+
+:: P0Walkaway {"position":"320,100","size":"160,120"}
+''SCREEN:'' //The same woman’s face appears again on the next wall, and again, smaller each time.//
+''MEDIA:'' //The same face repeats down the street, smaller each time. The line under her changes. One soft piano note.//
+
+You keep walking. It is only an old poster.
+But at the next corner, she is there again. The same woman. The same sad eyes.
+Under her, a new line: “You walked past me. Everyone does.” You walk faster.
+Another wall — and she is there a third time, smaller now, almost a whisper: “I am only three minutes from here. Two hundred years I have waited. I can wait a little more.”
+You stop. The street is quiet. You want to know who she is.
+
+[[Go back and scan the code.->P1Threshold]]
+
+:: P1Threshold {"position":"540,100","size":"160,120"}
+''SCREEN:'' //A dark phone screen with her voice. A line of light on the ground points the way to the museum.//
+''MEDIA:'' //Dark screen + her voice. A glowing AR line on the pavement guides you. The building is revealed at the end.//
+
+Your phone hums as the code opens.
+No app, no download — just a dark screen and her voice, close, like she is standing next to you: “You came. Follow me. I am only around the corner.”
+A thin line of light appears on your screen and points the way.
+You follow it past a coffee bar, around a quiet corner — and there it is.
+A big, calm building you have passed a hundred times and never really seen. The door is open.
+
+[[Step inside.->P2Inside]]
+
+:: P2Inside {"position":"760,100","size":"160,120"}
+''SCREEN:'' //Inside the museum. A cool, quiet hall. Light on the floor. Many painted faces on the walls.//
+''MEDIA:'' //Quiet hall, dust in the light beams, a faint echo. A row of flags appears. Soft tap feedback (haptic).//
+
+You step through the door, and the noise of the street stays behind you.
+The air inside is cool and still. It smells of old wood, dust, and something older — like stone.
+Light falls in soft squares on the floor. The walls are full of faces, hundreds of them, watching you in silence.
+Your phone gets warm in your hand. Her voice comes again, softer now: “Welcome. Before I show you anything — what language do you think in?”
+
+[[English->P3Mission]]
+[[Italiano->P3Mission]]
+[[Türkçe->P3Mission]]
+[[See more languages->P3Mission]]
+
+:: P3Mission {"position":"980,100","size":"160,120"}
+''SCREEN:'' //A dark map of Bologna with five grey, sleeping dots.//
+''MEDIA:'' //Soft ambient music begins. Five dim dots on a city map.//
+
+Her voice returns, slow, like she is telling you a secret: “Look around you. All these paintings — they did not start here. Two hundred years ago, they hung in real churches all over Bologna. Then the churches were closed, and the paintings were carried here, into this one building. And the city slowly forgot where they came from. Five of them are waiting for you. Find all five, and you will understand the secret.”
+A map of Bologna appears. Five grey dots, all dark. All sleeping.
+
+[[Show me the map.->P4MapIntro]]
+[[Take me to the first one.->PAINT1Approach]]
+
+:: P4MapIntro {"position":"1200,100","size":"160,120"}
+''SCREEN:'' //The Map of Exiles, all dots dark. Counter: “0 / 5”.//
+''MEDIA:'' //“0 / 5” counter. One dot gently pulsing.//
+
+“This is the Map of Exiles,” she says.
+“Every painting you wake up will remember its home, and a new light will appear here. Right now the whole map is dark. Zero of five homes found. Let us bring the first one back.”
+One dot pulses softly, calling you.
+
+[[Follow the light.->PAINT1Approach]]
+
+:: PAINT1Approach {"position":"1420,100","size":"160,120"}
+''SCREEN:'' //A wide staircase, then a quiet room. The painting of the woman from the poster.//
+''MEDIA:'' //A simple map / arrow to the room. Quiet footsteps.//
+
+The guide leads you up a wide, silent staircase into the room.
+“Look for a woman holding a small organ,” her voice says.
+“She stands very still, with four people around her. She is the one looking up, away from everyone.”
+And then you see her. The same woman from the poster.
+
+[[Stand in front of her.->PAINT1Story]]
+
+:: PAINT1Story {"position":"100,270","size":"160,120"}
+''SCREEN:'' //Close view of the painting. The room is empty — just you and her.//
+''MEDIA:'' //Her voice + the same text on screen. Slow light moves across the painting. Faint organ and choir.//
+
+You stand close. The room is empty. It is just you and her.
+A new voice begins — warm, a little tired, like it has not spoken for a very long time.
+It is her voice. “Hello. I am Saint Cecilia. A young painter named Raphael made me, five hundred years ago. For a long time I lived in a church called San Giovanni in Monte — only a few streets from where you saw my poster today. I hung above the altar there. People prayed in front of me every day. Then one day men came, took me down from the wall, and carried me here.”
+She stops. “But before you feel sorry for me — look at me carefully. There is something I want you to find.”
+
+[[Look closer.->PAINT1Question]]
+
+:: PAINT1Question {"position":"320,270","size":"160,120"}
+''SCREEN:'' //A gentle zoom to the bottom of the painting, near her feet.//
+''MEDIA:'' //Soft zoom to the floor of the painting. A small note: “Now look at the real one.”//
+
+“Look down,” she says. “At the ground, by my feet. Tell me what you see there.”
+You lean in and look at the real painting on the wall.
+
+[[Broken musical instruments.->PAINT1Fact]]
+[[A basket of flowers.->PAINT1Retry]]
+[[Some gold coins.->PAINT1Retry]]
+
+:: PAINT1Retry {"position":"540,270","size":"160,120"}
+''SCREEN:'' //The bottom of the painting glows for a second.//
+''MEDIA:'' //Soft highlight on the correct detail.//
+
+“Not quite,” she says kindly.
+“Do not worry. Look once more — right there, near my feet. What is broken on the ground?”
+
+[[Look again.->PAINT1Question]]
+
+:: PAINT1Fact {"position":"760,270","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes,” she says, and you can almost hear her smile.
+“Broken instruments. I let the music of the world fall, because I have heard something more beautiful — the music of heaven. That is why I look up.”
+Then the guide voice comes back, quieter: “And here is the thing most people never learn. Almost every painting in this building has a story like hers. Nearly one thousand works were carried here from churches all over the city. You are not standing in a museum. You are standing in the memory of a whole city.”
+
+[[Bring her home.->PAINT1Church]]
+
+:: PAINT1Church {"position":"980,270","size":"160,120"}
+''SCREEN:'' //A photo of the church San Giovanni in Monte. The map lights up one dot.//
+''MEDIA:'' //Church photo + a small distance card (“6 min walk”). The map dot lights up and a line is drawn. A happy double haptic.//
+
+On your screen, an old church appears — warm brick, a quiet square in front of it.
+“This is San Giovanni in Monte,” Cecilia says. “This was my home. It is still standing. The wall where I used to hang is still there — only now it is empty. Six minutes from this room. One day, go and stand in front of it for me.”
+On the Map of Exiles, a light wakes up. A thin line goes from her painting to her church.
+''1 of 5 homes found.''
+
+[[See it on the map.->PAINT1MapUpdate]]
+[[Find the next painting.->PAINT2Approach]]
+
+:: PAINT1MapUpdate {"position":"1200,270","size":"160,120"}
+''SCREEN:'' //The map: one light, four dark dots.//
+''MEDIA:'' //Map, 1 lit / 4 dark, one line drawn.//
+
+You look at the map. One light, alone, in a group of dark dots.
+“One found,” her voice says. “Four more are still sleeping out there. Shall we wake another?”
+
+[[Yes — next painting.->PAINT2Approach]]
+
+:: PAINT2Approach {"position":"1420,270","size":"160,120"}
+''SCREEN:'' //A short walk to the next room. A painting full of movement: a man on the ground, a big horse.//
+''MEDIA:'' //A simple arrow to the room. Quiet footsteps.//
+
+The guide leads you to the next room.
+“Look for a man who has fallen on the ground, with a big horse next to him,” her voice says.
+“He looks afraid. You will know him at once.” And there he is.
+
+[[Stand in front of him.->PAINT2Story]]
+
+:: PAINT2Story {"position":"100,440","size":"160,120"}
+''SCREEN:'' //Close view of the painting. A man thrown to the ground in bright light.//
+''MEDIA:'' //His voice + text on screen. A strong light moves down across the painting. A low, dramatic sound.//
+
+A new voice speaks — deep, and a little ashamed.
+“Hello. They call me Saul. I was a hard man once. I hunted people who believed in Christ. I was strong, and I was proud. A painter named Ludovico Carracci painted this exact moment — the moment everything changed for me. I hung in a small chapel inside the great church of San Francesco, here in Bologna. Then they took me down and brought me here.”
+He pauses. “Before you judge me — look at me carefully. Something is happening to me. Can you see what?”
+
+[[Look closer.->PAINT2Question]]
+
+:: PAINT2Question {"position":"320,440","size":"160,120"}
+''SCREEN:'' //A gentle zoom to the animal beside the fallen man.//
+''MEDIA:'' //Soft zoom to the horse. Note: “Now look at the real one.”//
+
+“Look next to me, on the ground,” Saul says.
+“A large animal is there, turning away in fear. What is it?”
+You lean in and look at the real painting on the wall.
+
+[[A horse.->PAINT2Fact]]
+[[A lion.->PAINT2Retry]]
+[[A camel.->PAINT2Retry]]
+
+:: PAINT2Retry {"position":"540,440","size":"160,120"}
+''SCREEN:'' //The animal glows for a second.//
+''MEDIA:'' //Soft highlight on the horse.//
+
+“Look again,” he says.
+“It is the animal I was riding — the one that threw me down.”
+
+[[Look again.->PAINT2Question]]
+
+:: PAINT2Fact {"position":"760,440","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — my horse,” Saul says.
+“A light came from the sky, so bright that it blinded me, and I fell. In that moment I changed. The proud man who hated died on this road. I stood up as Paul, and I gave the rest of my life to the very people I once hunted.”
+Then the guide adds one fact: “The church he came from, San Francesco, is one of the oldest and biggest in Bologna — and it is still open today. Walk inside its tall, quiet halls one day, and think of me.”
+
+[[Bring him home.->PAINT2Church]]
+
+:: PAINT2Church {"position":"980,440","size":"160,120"}
+''SCREEN:'' //A photo of the Basilica di San Francesco. The map lights up a second dot.//
+''MEDIA:'' //Church photo + a distance card (“10 min walk”). The map dot lights up, a line is drawn. A happy double haptic.//
+
+A great brick church appears on your screen.
+“This is San Francesco,” Saul says. “This was my home. It is still standing, only ten minutes from here. Go and stand in its silence one day.”
+On the Map of Exiles, a second light wakes up. A line goes from his painting to his church.
+''2 of 5 homes found.''
+
+[[See it on the map.->PAINT2MapUpdate]]
+[[Find the next painting.->PAINT4Approach]]
+
+:: PAINT2MapUpdate {"position":"1200,440","size":"160,120"}
+''SCREEN:'' //The map: two lights, three dark dots.//
+''MEDIA:'' //Map, 2 lit / 3 dark, lines drawn.//
+
+Two lights now.
+“Two found,” her voice says. “Three more are still sleeping out there. Shall we wake another?”
+
+[[Yes — next painting.->PAINT4Approach]]
+
+:: PAINT4Approach {"position":"1420,440","size":"160,120"}
+''SCREEN:'' //A bigger, darker painting. A kneeling man, metal armour, rich robes.//
+''MEDIA:'' //A simple arrow to the room. Quiet footsteps.//
+
+The guide leads you on.
+“Look for a strong man kneeling down, with shining armour near him and people putting a robe on his shoulders,” she says.
+And there he is.
+
+[[Stand in front of him.->PAINT4Story]]
+
+:: PAINT4Story {"position":"100,610","size":"160,120"}
+''SCREEN:'' //Close view. A warrior kneeling, half soldier, half monk.//
+''MEDIA:'' //His voice + text. A warm side light. A low, noble sound.//
+
+A strong, calm voice speaks. “Hello. My name is William. Once I was a duke — I had land, money, and a soldier's armour. I won many fights. A painter they called Guercino painted me at the strangest moment of my life: the day I gave it all up. I hung in the church of the Santi Gregorio e Siro, before they brought me here.”
+A pause. “Look at me carefully. I am changing my clothes — and my whole life with them. Can you see what I am taking off?”
+
+[[Look closer.->PAINT4Question]]
+
+:: PAINT4Question {"position":"320,610","size":"160,120"}
+''SCREEN:'' //A gentle zoom to his body and the ground around him.//
+''MEDIA:'' //Soft zoom to the armour. Note: “Now look at the real one.”//
+
+“Look at my body and at the ground beside me,” William says.
+“I am taking off the thing that protected me in every battle. What is it?”
+You lean in and look at the real painting.
+
+[[His metal armour.->PAINT4Fact]]
+[[His shoes.->PAINT4Retry]]
+[[His crown.->PAINT4Retry]]
+
+:: PAINT4Retry {"position":"540,610","size":"160,120"}
+''SCREEN:'' //The armour glows for a second.//
+''MEDIA:'' //Soft highlight on the armour.//
+
+“Look again,” he says.
+“See the cold metal leaving my body — the armour I wore in war.”
+
+[[Look again.->PAINT4Question]]
+
+:: PAINT4Fact {"position":"760,610","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — my armour,” William says.
+“I put down my weapons and my riches, and they dressed me as a simple monk. The strongest fight of my life was the one where I gave up fighting.”
+Then the guide adds a fact: “The painter's nickname, Guercino, means ‘the little squinter’ — he had a problem with one eye. But few painters in the world ever saw colour and light as well as he did.”
+
+[[Bring him home.->PAINT4Church]]
+
+:: PAINT4Church {"position":"980,610","size":"160,120"}
+''SCREEN:'' //A photo of the church of Santi Gregorio e Siro. The map lights up a third dot.//
+''MEDIA:'' //Church photo + a distance card. Map dot lights up, a line is drawn. Happy double haptic.//
+
+A church appears on your screen.
+“This is the church of the Santi Gregorio e Siro,” William says.
+“This was my home. The wall is empty now, but it remembers me.”
+On the Map of Exiles, a third light wakes up.
+''3 of 5 homes found.''
+
+[[See it on the map.->PAINT4MapUpdate]]
+[[Find the next painting.->PAINT5Approach]]
+
+:: PAINT4MapUpdate {"position":"1200,610","size":"160,120"}
+''SCREEN:'' //The map: three lights, two dark dots.//
+''MEDIA:'' //Map, 3 lit / 2 dark, lines drawn.//
+
+Three lights now.
+“Three found,” her voice says. “Only two are still sleeping. Shall we wake another?”
+
+[[Yes — next painting.->PAINT5Approach]]
+
+:: PAINT5Approach {"position":"1420,610","size":"160,120"}
+''SCREEN:'' //A small, old painting that glows with gold. It is full of busy little figures.//
+''MEDIA:'' //A simple arrow to the room. Quiet footsteps.//
+
+The guide walks you on.
+“This next one is very different,” she says. “It is small, it is old, and the whole background is gold. It is full of tiny people — a man in a tall pointed hat, others in red and yellow, a big wheel, and something burning at the bottom. Go and find it.”
+And there it is.
+
+[[Stand in front of it.->PAINT5Story]]
+
+:: PAINT5Story {"position":"100,780","size":"160,120"}
+''SCREEN:'' //Close view. A glowing gold panel, full of small figures and little scenes from a saint's life.//
+''MEDIA:'' //His voice + text on screen. A soft, warm gold light. Quiet, old, medieval-sounding music.//
+
+A calm, very old voice speaks, slow and kind.
+“Hello. I am Anthony. Long, long ago I left the city and went to live alone in the desert, to be close to God. I was one of the very first men to do this. Out there, in the dark, demons came to test me — but I never ran away. A painter named Vitale da Bologna painted little stories from my life here, on gold, almost seven hundred years ago. I lived in the church of Sant'Antonio Abate, here in the city, before they brought me here.”
+A pause. “Look at me carefully. Down at the bottom of the painting, something is burning. Can you find it?”
+
+[[Look closer.->PAINT5Question]]
+
+:: PAINT5Question {"position":"320,780","size":"160,120"}
+''SCREEN:'' //A gentle zoom to the bottom of the painting, where orange flames burn under the figures.//
+''MEDIA:'' //Soft zoom to the flames. Note: “Now look at the real one.”//
+
+“Look at the very bottom of the painting,” Anthony says.
+“Below all the people, something bright and hot is burning. What is it?”
+You lean in and look at the real painting on the wall.
+
+[[Fire.->PAINT5Fact]]
+[[Water.->PAINT5Retry]]
+[[Flowers.->PAINT5Retry]]
+
+:: PAINT5Retry {"position":"540,780","size":"160,120"}
+''SCREEN:'' //The flames glow for a second.//
+''MEDIA:'' //Soft highlight on the flames.//
+
+“Look again,” he says gently.
+“Right at the bottom, orange and hot — flames.”
+
+[[Look again.->PAINT5Question]]
+
+:: PAINT5Fact {"position":"760,780","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — fire,” Anthony says.
+“Fire followed my name all my life. Long ago there was a terrible sickness that burned people's skin, and they even called it ‘Saint Anthony's Fire.’ Sick and frightened people came to me, and prayed to be saved from it.”
+Then the guide adds a fact: “And here is something special — this little gold painting is one of the ''oldest'' works in the whole museum, almost seven hundred years old, much older than everything else you have met today.”
+
+[[Bring him home.->PAINT5Church]]
+
+:: PAINT5Church {"position":"980,780","size":"160,120"}
+''SCREEN:'' //A photo of the church of Sant'Antonio Abate. The map lights up a fourth dot.//
+''MEDIA:'' //Church photo + a distance card. The map dot lights up, a line is drawn. A happy double haptic.//
+
+An old church appears on your screen.
+“This is the church of Sant'Antonio Abate,” he says. “This was my first home in the city, long before this museum existed. They moved me more than once — but you have found my beginning.”
+On the Map of Exiles, a fourth light wakes up.
+''4 of 5 homes found.''
+
+[[See it on the map.->PAINT5MapUpdate]]
+[[Find the last painting.->PAINT6Approach]]
+
+:: PAINT5MapUpdate {"position":"1200,780","size":"160,120"}
+''SCREEN:'' //The map: four lights, one dark dot.//
+''MEDIA:'' //Map, 4 lit / 1 dark. The last dot pulses slowly.//
+
+Four lights now. Only one dot is still dark.
+“Almost there,” her voice says, soft and serious. “One painting is still sleeping. It is the hardest one to look at. Are you ready?”
+
+[[Yes. Show me the last one.->PAINT6Approach]]
+
+:: PAINT6Approach {"position":"1420,780","size":"160,120"}
+''SCREEN:'' //A large, dramatic painting. Mothers, soldiers, fear — and two small angels above.//
+''MEDIA:'' //A simple arrow to the room. The music drops to almost nothing.//
+
+The guide leads you to the last room, slowly.
+“This one is full of pain,” she says. “Mothers, soldiers, and great fear. But look up to the top too — there is something gentle there. Take your time.”
+And there it is.
+
+[[Stand in front of it.->PAINT6Story]]
+
+:: PAINT6Story {"position":"100,950","size":"160,120"}
+''SCREEN:'' //Close view. A scene of terror, painted with strange beauty.//
+''MEDIA:'' //Its voice + text. A cold light below, a soft warm light above. A single held note.//
+
+A gentle voice speaks, careful and sad.
+“Hello. I am hard to look at, I know. I show a terrible day: a cruel king sent his soldiers to harm the youngest children, and the mothers could do nothing but cry and run. A painter named Guido Reni made me — and he made even this pain beautiful, so the world would never forget it. I hung in the great Basilica di San Domenico, until they brought me here.”
+A pause. “Look at me carefully. The painting is dark — but at the very top, there is hope. Can you find it?”
+
+[[Look closer.->PAINT6Question]]
+
+:: PAINT6Question {"position":"320,950","size":"160,120"}
+''SCREEN:'' //A gentle zoom to the top of the painting, to the two small angels.//
+''MEDIA:'' //Soft zoom to the angels. Note: “Now look at the real one.”//
+
+“Look up, at the very top,” the voice says.
+“Two small angels float there, above all the fear. What do they hold in their hands?”
+You lean in and look at the real painting.
+
+[[Green palm leaves.->PAINT6Fact]]
+[[Golden swords.->PAINT6Retry]]
+[[Baskets of bread.->PAINT6Retry]]
+
+:: PAINT6Retry {"position":"540,950","size":"160,120"}
+''SCREEN:'' //The angels glow softly for a second.//
+''MEDIA:'' //Soft highlight on the angels' palms.//
+
+“Look again,” the voice says gently.
+“High above the soldiers, in the angels' hands — something green and soft, not a weapon.”
+
+[[Look again.->PAINT6Question]]
+
+:: PAINT6Fact {"position":"760,950","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — palm leaves,” the voice says.
+“A palm leaf is an old sign of someone who is remembered forever. The angels are saying that these innocent children are not lost. They are little saints now. That is the secret of this sad painting: even here, there is light.”
+Then the guide adds one last fact: “The church it came from, San Domenico, holds a famous tomb — and a young Michelangelo, before he was famous, carved part of it with his own hands.”
+
+[[Bring it home.->PReveal]]
+
+:: PReveal {"position":"980,950","size":"160,120"}
+''SCREEN:'' //The map. All five dots light up. Lines connect every painting to its church across the city.//
+''MEDIA:'' //All lines connect across the city. The music grows.//
+
+You wake the fifth painting. The last dark dot lights up. Then the map does something.
+One by one, lines stretch from every painting to every church — until the whole city is covered with light.
+Five paintings. Five homes. One Bologna. All five voices speak together, softly: “We are not old pictures on a wall. We are the memory of this city's lost churches. And today, you remembered us.”
+
+[[See your result.->PShare]]
+
+:: PShare {"position":"1200,950","size":"160,120"}
+''SCREEN:'' //A result card with the full glowing map and your name.//
+''MEDIA:'' //A shareable card. A live public counter.//
+
+The screen shows you a card: your full map, glowing, with one line under it — “I found the Secret Next Door.”
+“You are the 2,148th person to find the secret this month,” her voice says.
+“Show a friend. The next student walking past outside could be the one who brings the next painting home.”
+
+[[Share it.->PHomecoming]]
+[[Keep it for yourself.->PHomecoming]]
+
+:: PHomecoming {"position":"100,1120","size":"160,120"}
+''SCREEN:'' //A city map with the nearest church marked.//
+''MEDIA:'' //City map, nearest church marked. An “AR here” badge, with a photo as a backup if AR does not work.//
+
+“There is one more thing,” Cecilia says, one last time.
+“Now go outside. Walk the six minutes to my church. Stand in front of the empty wall, lift your phone — and watch me come home, just for a moment.”
+
+[[Take me to the nearest church.->PEnd]]
+[[Another day. But I will go.->PEnd]]
+
+:: PEnd {"position":"320,1120","size":"160,120"}
+''SCREEN:'' //The quiet hall again.//
+''MEDIA:'' //A soft ending. The public counter goes up by one.//
+
+“They took us from the city,” the voices say, “and the city forgot. But you walked in. You looked closer. You remembered. Thank you for bringing us home.”
+The room is quiet again. But it does not feel empty anymore.
+
+[[Start over->P0StreetHook]]
