@@ -1,0 +1,1753 @@
+:: StoryTitle
+The Secret Next Door v4 (5-Painting Edition)
+
+
+:: StoryData
+{
+  "ifid": "61D77317-38B1-4FD1-9B4D-1B5FC0A13728",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "P0StreetHook",
+  "tag-colors": {
+    "street-bg": "blue",
+    "museum-bg": "blue",
+    "church1_bg": "blue",
+    "church2_bg": "blue",
+    "church3_bg": "blue",
+    "church4_bg": "blue"
+  },
+  "zoom": 1
+}
+
+
+:: P0StreetHook [street-bg] {"position":"100,100","size":"160,120"}
+You walk down Via Zamboni, like you do every day.
+Students pass you with coffee and headphones. The walls are full of posters — concerts, rooms for rent, lost cats.
+But one poster makes you stop. It is old and faded. A woman is painted on it.
+She looks up at the sky, and she looks sad.
+Under her face, someone wrote one line by hand: “Everyone walks past me. Will you?”
+In the corner there is a small, sharp QR code. It does not belong on such old paper.
+What do you do?
+
+[[Lift your phone and scan the code.->P1Threshold]]
+[[Keep walking. You have somewhere to be.->P0Walkaway]]
+(set: $unlockedCount to 0)
+
+
+:: P0Walkaway {"position":"320,100","size":"160,120"}
+''SCREEN:'' //The same woman’s face appears again on the next wall, and again, smaller each time.//
+''MEDIA:'' //The same face repeats down the street, smaller each time. The line under her changes. One soft piano note.//
+
+You keep walking. It is only an old poster.
+But at the next corner, she is there again. The same woman. The same sad eyes.
+Under her, a new line: “You walked past me. Everyone does.” You walk faster.
+Another wall — and she is there a third time, smaller now, almost a whisper: “I am only three minutes from here. Two hundred years I have waited. I can wait a little more.”
+You stop. The street is quiet. You want to know who she is.
+
+[[Go back and scan the code.->P1Threshold]]
+
+
+:: P1Threshold {"position":"540,100","size":"160,120"}
+''SCREEN:'' //A dark phone screen with her voice. A line of light on the ground points the way to the museum.//
+''MEDIA:'' //Dark screen + her voice. A glowing AR line on the pavement guides you. The building is revealed at the end.//
+
+Your phone hums as the code opens.
+No app, no download — just a dark screen and her voice, close, like she is standing next to you: “You came. Follow me. I am only around the corner.”
+A thin line of light appears on your screen and points the way.
+You follow it past a coffee bar, around a quiet corner — and there it is.
+A big, calm building you have passed a hundred times and never really seen. The door is open.
+
+[[Step inside.->P2Inside]]
+
+
+:: P2Inside [museum-bg] {"position":"760,100","size":"160,120"}
+You step through the door, and the noise of the street stays behind you.
+The air inside is cool and still. It smells of old wood, dust, and something older — like stone.
+Light falls in soft squares on the floor. The walls are full of faces, hundreds of them, watching you in silence.
+Your phone gets warm in your hand. Her voice comes again, softer now: 
+“Look around you. All these paintings — they did not start here. Two hundred years ago, they hung in real churches all over Bologna. Then the churches were closed, and the paintings were carried here, into this one building. And the city slowly forgot where they came from. Five of them are waiting for you. Find all five, and you will understand the secret.”
+A map of Bologna appears. Five grey dots, all dark. All sleeping.
+
+[[Show me the map.->P4MapIntro]]
+[[Take me to the first one.->PAINT1Approach]]
+
+
+:: P4MapIntro [museum-bg] {"position":"1200,100","size":"160,120"}
+<div id="dynamic-map" data-progress="0" style="height: 400px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #ddd;"></div>
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        // Read progress string and parse into an integer smoothly
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+        // HARD BOUNDARIES: Locked zoom between 14 and 16, disabled double-click zoom
+        var map = L.map('dynamic-map', {
+            minZoom: 14,
+            maxZoom: 16,
+            doubleClickZoom: false
+        }).setView([44.49513, 11.34077], 14);
+
+        // Retro Parchment/Grey-scale Basemap Layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Marker Styles ---
+        var awakeStyle = {
+            color: '#D4AF37',     // Metallic Gold Border
+            fillColor: '#FFD700', // Bright Gold Fill
+            fillOpacity: 0.9,
+            radius: 9,
+            weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50',     // Dark Slate Blue Border for high contrast
+            fillColor: '#7F8C8D', // Solid Muted Charcoal Grey
+            fillOpacity: 0.75,
+            radius: 7,
+            weight: 2
+        };
+
+        // --- Database of 5 historic churches ---
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                popupText: "<b>Painting 1: Saint Cecilia</b><br>San Giovanni in Monte<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                popupText: "<b>Painting 2: Saint Paul</b><br>Basilica of San Francesco<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                popupText: "<b>Painting 3: Saint William</b><br>Santi Gregorio e Siro<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                popupText: "<b>Painting 4: Saint Anthony</b><br>Sant'Antonio Abate<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                popupText: "<b>Painting 5: Innocent Children</b><br>Basilica of San Domenico<br><i>Status: Awakened!</i>"
+            }
+        ];
+
+        // --- App Starting Point (Gallery Hub) ---
+        var galleryCoords = [44.49754, 11.35239];
+        
+        // Background anchor ring for Gallery Hub
+        L.circleMarker(galleryCoords, { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        
+        L.circleMarker(galleryCoords, {
+            color: '#1A252F',
+            fillColor: '#2C3E50',
+            fillOpacity: 0.9,
+            radius: 7,
+            weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+        // --- Render States Loop ---
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                // 1. Awakened State: Only renders the golden marker, NO polyline link
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(church.popupText);
+            } 
+            else {
+                // 2. Locked State: Renders outer anchor ring and solid grey core marker
+                L.circleMarker(church.coords, {
+                    color: '#BDC3C7',
+                    weight: 1,
+                    radius: 11,
+                    fill: false
+                }).addTo(map);
+
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<b>Locked Memory</b><br>Keep exploring to reveal these coordinates.");
+            }
+        });
+    }
+}, 350);
+</script>
+“This is the Map of Exiles,” she says.
+“Every painting you wake up will remember its home, and a new light will appear here. Right now the whole map is dark. Zero of five homes found. Let us bring the first one back.”
+One dot pulses softly, calling you.
+
+[[Follow the light.->PAINT1Approach]]
+
+
+:: PAINT1Approach {"position":"1420,100","size":"160,120"}
+''SCREEN:'' //A wide staircase, then a quiet room. The painting of the woman from the poster.//
+''MEDIA:'' //A simple map / arrow to the room. Quiet footsteps.//
+
+The guide leads you up a wide, silent staircase into the room.
+“Look for a woman holding a small organ,” her voice says.
+“She stands very still, with four people around her. She is the one looking up, away from everyone.”
+And then you see her. The same woman from the poster.
+
+[[Stand in front of her.->PAINT1Story]]
+
+
+:: PAINT1Church [church1_bg] {"position":"975,275","size":"160,120"}
+(set: $unlockedCount to 1)
+On your screen, an old church appears.
+“This is San Giovanni in Monte,” Cecilia says. “This was my home. It is still standing. The wall where I used to hang is still there — only now it is empty. Six minutes from this room. One day, go and stand in front of it for me.”
+On the Map of Exiles, a light wakes up. A thin line goes from her painting to her church.
+''1 of 5 homes found.''
+
+[[See it on the map.->PAINT1MapUpdate]]
+[[Find the next painting.->PAINT2Approach]]
+
+
+:: PAINT1Fact {"position":"760,270","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes,” she says, and you can almost hear her smile.
+“Broken instruments. I let the music of the world fall, because I have heard something more beautiful — the music of heaven. That is why I look up.”
+Then the guide voice comes back, quieter: “And here is the thing most people never learn. Almost every painting in this building has a story like hers. Nearly one thousand works were carried here from churches all over the city. You are not standing in a museum. You are standing in the memory of a whole city.”
+
+[[Bring her home.->PAINT1Church]]
+
+
+:: PAINT1MapUpdate {"position":"1200,275","size":"160,120"}
+<div id="dynamic-map" data-progress="1" style="height: 400px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #ddd;"></div>
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        // Read progress string and parse into an integer smoothly
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+        // HARD BOUNDARIES: Locked zoom between 14 and 16, disabled double-click zoom
+        var map = L.map('dynamic-map', {
+            minZoom: 14,
+            maxZoom: 16,
+            doubleClickZoom: false
+        }).setView([44.49513, 11.34077], 14);
+
+        // Retro Parchment/Grey-scale Basemap Layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Marker Styles ---
+        var awakeStyle = {
+            color: '#D4AF37',     // Metallic Gold Border
+            fillColor: '#FFD700', // Bright Gold Fill
+            fillOpacity: 0.9,
+            radius: 9,
+            weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50',     // Dark Slate Blue Border for high contrast
+            fillColor: '#7F8C8D', // Solid Muted Charcoal Grey
+            fillOpacity: 0.75,
+            radius: 7,
+            weight: 2
+        };
+
+        // --- Database of 5 historic churches ---
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                popupText: "<b>Painting 1: Saint Cecilia</b><br>San Giovanni in Monte<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                popupText: "<b>Painting 2: Saint Paul</b><br>Basilica of San Francesco<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                popupText: "<b>Painting 3: Saint William</b><br>Santi Gregorio e Siro<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                popupText: "<b>Painting 4: Saint Anthony</b><br>Sant'Antonio Abate<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                popupText: "<b>Painting 5: Innocent Children</b><br>Basilica of San Domenico<br><i>Status: Awakened!</i>"
+            }
+        ];
+
+        // --- App Starting Point (Gallery Hub) ---
+        var galleryCoords = [44.49754, 11.35239];
+        
+        // Background anchor ring for Gallery Hub
+        L.circleMarker(galleryCoords, { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        
+        L.circleMarker(galleryCoords, {
+            color: '#1A252F',
+            fillColor: '#2C3E50',
+            fillOpacity: 0.9,
+            radius: 7,
+            weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+        // --- Render States Loop ---
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                // 1. Awakened State: Only renders the golden marker, NO polyline link
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(church.popupText);
+            } 
+            else {
+                // 2. Locked State: Renders outer anchor ring and solid grey core marker
+                L.circleMarker(church.coords, {
+                    color: '#BDC3C7',
+                    weight: 1,
+                    radius: 11,
+                    fill: false
+                }).addTo(map);
+
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<b>Locked Memory</b><br>Keep exploring to reveal these coordinates.");
+            }
+        });
+    }
+}, 350);
+</script>
+You look at the map. One light, alone, in a group of dark dots.
+“One found,” her voice says. “Four more are still sleeping out there. Shall we wake another?”
+
+[[Yes — next painting.->PAINT2Approach]]
+
+
+:: PAINT1Question {"position":"325,275","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="cecilia-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/ESTASI%20DI%20SANTA%20CECILIA%20FRA%20I%20SANTI%20PAOLO%2C%20GIOVANNI%20EVANGELISTA%2C%20AGOSTINO%20E%20MARIA%20MADDALENA.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center bottom;">
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .cecilia-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+</style>
+“Look down,” she says. “At the ground, by my feet. Tell me what you see there.”
+You lean in and look at the real painting on the wall.
+
+[[Broken musical instruments.->PAINT1Fact]]
+[[A basket of flowers.->PAINT1Retry]]
+[[Some gold coins.->PAINT1Retry]]
+
+
+:: PAINT1Retry {"position":"540,270","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        
+        <img class="cecilia-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/ESTASI%20DI%20SANTA%20CECILIA%20FRA%20I%20SANTI%20PAOLO%2C%20GIOVANNI%20EVANGELISTA%2C%20AGOSTINO%20E%20MARIA%20MADDALENA.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center bottom;">
+             
+        <div class="bottom-detail-glow"></div>
+        
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .cecilia-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+    @keyframes softHighlightFlash {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .bottom-detail-glow {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 45%;
+        background: radial-gradient(circle at center bottom, rgba(212, 175, 55, 0.7) 0%, rgba(255, 253, 247, 0.2) 40%, transparent 70%);
+        mix-blend-mode: screen;
+        pointer-events: none;
+        opacity: 0;
+        animation: softHighlightFlash 2.5s ease-in-out 5.0s forwards;
+    }
+</style>
+“Not quite,” she says kindly.
+“Do not worry. Look once more — right there, near my feet. What is broken on the ground?”
+
+[[Look again.->PAINT1Question]]
+
+
+:: PAINT1Story {"position":"100,275","size":"160,120"}
+ <img id="cecilia-painting" 
+         src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/ESTASI%20DI%20SANTA%20CECILIA%20FRA%20I%20SANTI%20PAOLO%2C%20GIOVANNI%20EVANGELISTA%2C%20AGOSTINO%20E%20MARIA%20MADDALENA.jpg" 
+         style="max-width: 100%; height: auto; display: block; margin: 0 auto; transform-origin: center 97%; transform: scale(1.0); transition: transform 9.5s cubic-bezier(0.15, 0.85, 0.45, 1);text-align: center;">
+You stand close. The room is empty. It is just you and her.
+A new voice begins — warm, a little tired, like it has not spoken for a very long time.
+It is her voice. “Hello. I am Saint Cecilia. A young painter named Raphael made me, five hundred years ago. For a long time I lived in a church called San Giovanni in Monte — only a few streets from where you saw my poster today. I hung above the altar there. People prayed in front of me every day. Then one day men came, took me down from the wall, and carried me here.”
+She stops. “But before you feel sorry for me — look at me carefully. There is something I want you to find.”
+
+[[Look closer.->PAINT1Question]]
+
+
+:: PAINT2Approach {"position":"1420,270","size":"160,120"}
+''SCREEN:'' //A short walk to the next room. A painting full of movement: a man on the ground, a big horse.//
+''MEDIA:'' //A simple arrow to the room. Quiet footsteps.//
+
+The guide leads you to the next room.
+“Look for a man who has fallen on the ground, with a big horse next to him,” her voice says.
+“He looks afraid. You will know him at once.” And there he is.
+
+[[Stand in front of him.->PAINT2Story]]
+
+
+:: PAINT2Church [church2_bg] {"position":"980,440","size":"160,120"}
+(set: $unlockedCount to 2)
+A great brick church appears on your screen.
+“This is San Francesco,” Paul says. “This was my home. It is still standing, only ten minutes from here. Go and stand in its silence one day.”
+On the Map of Exiles, a second light wakes up. A line goes from his painting to his church.
+''2 of 5 homes found.''
+
+[[See it on the map.->PAINT2MapUpdate]]
+[[Find the next painting.->PAINT4Approach]]
+
+
+:: PAINT2Fact {"position":"760,440","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — my horse,” Paul says.
+“A light came from the sky, so bright that it blinded me, and I fell. In that moment I changed. The proud man who hated died on this road. I stood up as Paul, and I gave the rest of my life to the very people I once hunted.”
+Then the guide adds one fact: “The church he came from, San Francesco, is one of the oldest and biggest in Bologna — and it is still open today. Walk inside its tall, quiet halls one day, and think of me.”
+
+[[Bring him home.->PAINT2Church]]
+
+
+:: PAINT2MapUpdate {"position":"1200,450","size":"160,120"}
+<div id="dynamic-map" data-progress="2" style="height: 400px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #ddd;"></div>
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        // Read progress string and parse into an integer smoothly
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+        // HARD BOUNDARIES: Locked zoom between 14 and 16, disabled double-click zoom
+        var map = L.map('dynamic-map', {
+            minZoom: 14,
+            maxZoom: 16,
+            doubleClickZoom: false
+        }).setView([44.49513, 11.34077], 14);
+
+        // Retro Parchment/Grey-scale Basemap Layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Marker Styles ---
+        var awakeStyle = {
+            color: '#D4AF37',     // Metallic Gold Border
+            fillColor: '#FFD700', // Bright Gold Fill
+            fillOpacity: 0.9,
+            radius: 9,
+            weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50',     // Dark Slate Blue Border for high contrast
+            fillColor: '#7F8C8D', // Solid Muted Charcoal Grey
+            fillOpacity: 0.75,
+            radius: 7,
+            weight: 2
+        };
+
+        // --- Database of 5 historic churches ---
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                popupText: "<b>Painting 1: Saint Cecilia</b><br>San Giovanni in Monte<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                popupText: "<b>Painting 2: Saint Paul</b><br>Basilica of San Francesco<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                popupText: "<b>Painting 3: Saint William</b><br>Santi Gregorio e Siro<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                popupText: "<b>Painting 4: Saint Anthony</b><br>Sant'Antonio Abate<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                popupText: "<b>Painting 5: Innocent Children</b><br>Basilica of San Domenico<br><i>Status: Awakened!</i>"
+            }
+        ];
+
+        // --- App Starting Point (Gallery Hub) ---
+        var galleryCoords = [44.49754, 11.35239];
+        
+        // Background anchor ring for Gallery Hub
+        L.circleMarker(galleryCoords, { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        
+        L.circleMarker(galleryCoords, {
+            color: '#1A252F',
+            fillColor: '#2C3E50',
+            fillOpacity: 0.9,
+            radius: 7,
+            weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+        // --- Render States Loop ---
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                // 1. Awakened State: Only renders the golden marker, NO polyline link
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(church.popupText);
+            } 
+            else {
+                // 2. Locked State: Renders outer anchor ring and solid grey core marker
+                L.circleMarker(church.coords, {
+                    color: '#BDC3C7',
+                    weight: 1,
+                    radius: 11,
+                    fill: false
+                }).addTo(map);
+
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<b>Locked Memory</b><br>Keep exploring to reveal these coordinates.");
+            }
+        });
+    }
+}, 350);
+</script>
+Two lights now.
+“Two found,” her voice says. “Three more are still sleeping out there. Shall we wake another?”
+
+[[Yes — next painting.->PAINT4Approach]]
+
+
+:: PAINT2Question {"position":"320,440","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="paolo-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/CONVERSIONE%20DI%20SAN%20PAOLO.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center center;">
+    </div>
+</div>
+
+<style>
+    @keyframes centerSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .paolo-cinema-zoom {
+        animation: centerSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+</style>
+“Look next to me, on the ground,” Paul says.
+“A large animal is there, turning away in fear. What is it?”
+You lean in and look at the real painting on the wall.
+
+[[A lion.->PAINT2Retry]]
+[[A camel.->PAINT2Retry]]
+[[A horse.->PAINT2Fact]]
+
+
+:: PAINT2Retry {"position":"550,450","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        
+        <img class="paolo-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/CONVERSIONE%20DI%20SAN%20PAOLO.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center center;">
+             
+        <div class="paolo-center-glow"></div>
+        
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .paolo-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+    @keyframes softHighlightFlash {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .paolo-center-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.7) 0%, rgba(255, 253, 247, 0.2) 40%, transparent 70%);
+        mix-blend-mode: screen;
+        pointer-events: none;
+        opacity: 0;
+        animation: softHighlightFlash 2.5s ease-in-out 5.0s forwards;
+    }
+</style>
+“Look again,” he says.
+“It is the animal I was riding — the one that threw me down.”
+
+[[Look again.->PAINT2Question]]
+
+
+:: PAINT2Story {"position":"100,440","size":"160,120"}
+ <img id="cecilia-painting" 
+         src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/CONVERSIONE%20DI%20SAN%20PAOLO.jpg" 
+         style="max-width: 100%; height: auto; display: block; margin: 0 auto; transform-origin: center 97%; transform: scale(1.0); transition: transform 9.5s cubic-bezier(0.15, 0.85, 0.45, 1);text-align: center;">
+ A new voice speaks — deep, and a little ashamed.
+“Hello. They call me Paul. I was a hard man once. I hunted people who believed in Christ. I was strong, and I was proud. A painter named Ludovico Carracci painted this exact moment — the moment everything changed for me. I hung in a small chapel inside the great church of San Francesco, here in Bologna. Then they took me down and brought me here.”
+He pauses. “Before you judge me — look at me carefully. Something is happening to me. Can you see what?”
+
+[[Look closer.->PAINT2Question]]
+
+
+:: PAINT4Approach {"position":"1420,440","size":"160,120"}
+''SCREEN:'' //A bigger, darker painting. A kneeling man, metal armour, rich robes.//
+''MEDIA:'' //A simple arrow to the room. Quiet footsteps.//
+
+The guide leads you on.
+“Look for a strong man kneeling down, with shining armour near him and people putting a robe on his shoulders,” she says.
+And there he is.
+
+[[Stand in front of him.->PAINT4Story]]
+
+
+:: PAINT4Church [church3_bg] {"position":"980,610","size":"160,120"}
+(set: $unlockedCount to 3)
+A church appears on your screen.
+“This is the church of the Santi Gregorio e Siro,” William says.
+“This was my home. The wall is empty now, but it remembers me.”
+On the Map of Exiles, a third light wakes up.
+''3 of 5 homes found.''
+
+[[See it on the map.->PAINT4MapUpdate]]
+[[Find the next painting.->PAINT5Approach]]
+
+
+:: PAINT4Fact {"position":"760,610","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — my armour,” William says.
+“I put down my weapons and my riches, and they dressed me as a simple monk. The strongest fight of my life was the one where I gave up fighting.”
+Then the guide adds a fact: “The painter's nickname, Guercino, means ‘the little squinter’ — he had a problem with one eye. But few painters in the world ever saw colour and light as well as he did.”
+
+[[Bring him home.->PAINT4Church]]
+
+
+:: PAINT4MapUpdate {"position":"1200,600","size":"160,120"}
+<div id="dynamic-map" data-progress="3" style="height: 400px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #ddd;"></div>
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        // Read progress string and parse into an integer smoothly
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+        // HARD BOUNDARIES: Locked zoom between 14 and 16, disabled double-click zoom
+        var map = L.map('dynamic-map', {
+            minZoom: 14,
+            maxZoom: 16,
+            doubleClickZoom: false
+        }).setView([44.49513, 11.34077], 14);
+
+        // Retro Parchment/Grey-scale Basemap Layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Marker Styles ---
+        var awakeStyle = {
+            color: '#D4AF37',     // Metallic Gold Border
+            fillColor: '#FFD700', // Bright Gold Fill
+            fillOpacity: 0.9,
+            radius: 9,
+            weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50',     // Dark Slate Blue Border for high contrast
+            fillColor: '#7F8C8D', // Solid Muted Charcoal Grey
+            fillOpacity: 0.75,
+            radius: 7,
+            weight: 2
+        };
+
+        // --- Database of 5 historic churches ---
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                popupText: "<b>Painting 1: Saint Cecilia</b><br>San Giovanni in Monte<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                popupText: "<b>Painting 2: Saint Paul</b><br>Basilica of San Francesco<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                popupText: "<b>Painting 3: Saint William</b><br>Santi Gregorio e Siro<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                popupText: "<b>Painting 4: Saint Anthony</b><br>Sant'Antonio Abate<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                popupText: "<b>Painting 5: Innocent Children</b><br>Basilica of San Domenico<br><i>Status: Awakened!</i>"
+            }
+        ];
+
+        // --- App Starting Point (Gallery Hub) ---
+        var galleryCoords = [44.49754, 11.35239];
+        
+        // Background anchor ring for Gallery Hub
+        L.circleMarker(galleryCoords, { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        
+        L.circleMarker(galleryCoords, {
+            color: '#1A252F',
+            fillColor: '#2C3E50',
+            fillOpacity: 0.9,
+            radius: 7,
+            weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+        // --- Render States Loop ---
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                // 1. Awakened State: Only renders the golden marker, NO polyline link
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(church.popupText);
+            } 
+            else {
+                // 2. Locked State: Renders outer anchor ring and solid grey core marker
+                L.circleMarker(church.coords, {
+                    color: '#BDC3C7',
+                    weight: 1,
+                    radius: 11,
+                    fill: false
+                }).addTo(map);
+
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<b>Locked Memory</b><br>Keep exploring to reveal these coordinates.");
+            }
+        });
+    }
+}, 350);
+</script>
+''SCREEN:'' //The map: three lights, two dark dots.//
+''MEDIA:'' //Map, 3 lit / 2 dark, lines drawn.//
+
+Three lights now.
+“Three found,” her voice says. “Only two are still sleeping. Shall we wake another?”
+
+[[Yes — next painting.->PAINT5Approach]]
+
+
+:: PAINT4Question {"position":"325,600","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="guglielmo-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/VESTIZIONE%20DI%20SAN%20GUGLIELMO.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center bottom;">
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .guglielmo-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+</style>
+“Look at my body and at the ground beside me,” William says.
+“I am taking off the thing that protected me in every battle. What is it?”
+You lean in and look at the real painting.
+
+[[His shoes.->PAINT4Retry]]
+[[His metal armour.->PAINT4Fact]]
+[[His crown.->PAINT4Retry]]
+
+
+:: PAINT4Retry {"position":"540,610","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="guglielmo-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/VESTIZIONE%20DI%20SAN%20GUGLIELMO.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center bottom;">
+        <div class="guglielmo-center-glow"></div>
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .guglielmo-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+    @keyframes softHighlightFlash {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .guglielmo-center-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.7) 0%, rgba(255, 253, 247, 0.2) 40%, transparent 70%);
+        mix-blend-mode: screen;
+        pointer-events: none;
+        opacity: 0;
+        animation: softHighlightFlash 2.5s ease-in-out 5.0s forwards;
+    }
+</style>
+“Look again,” he says.
+“See the cold metal leaving my body — the armour I wore in war.”
+
+[[Look again.->PAINT4Question]]
+
+
+:: PAINT4Story {"position":"100,600","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/VESTIZIONE%20DI%20SAN%20GUGLIELMO.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0;">
+    </div>
+</div>
+A strong, calm voice speaks. “Hello. My name is William. Once I was a duke — I had land, money, and a soldier's armour. I won many fights. A painter they called Guercino painted me at the strangest moment of my life: the day I gave it all up. I hung in the church of the Santi Gregorio e Siro, before they brought me here.”
+A pause. “Look at me carefully. I am changing my clothes — and my whole life with them. Can you see what I am taking off?”
+
+[[Look closer.->PAINT4Question]]
+
+
+:: PAINT5Approach {"position":"1420,610","size":"160,120"}
+''SCREEN:'' //A small, old painting that glows with gold. It is full of busy little figures.//
+''MEDIA:'' //A simple arrow to the room. Quiet footsteps.//
+
+The guide walks you on.
+“This next one is very different,” she says. “It is small, it is old, and the whole background is gold. It is full of tiny people — a man in a tall pointed hat, others in red and yellow, a big wheel, and something burning at the bottom. Go and find it.”
+And there it is.
+
+[[Stand in front of it.->PAINT5Story]]
+
+
+:: PAINT5Church [church4_bg] {"position":"980,780","size":"160,120"}
+(set: $unlockedCount to 4)
+An old church appears on your screen.
+“This is the church of Sant'Antonio Abate,” he says. “This was my first home in the city, long before this museum existed. They moved me more than once — but you have found my beginning.”
+On the Map of Exiles, a fourth light wakes up.
+''4 of 5 homes found.''
+
+[[See it on the map.->PAINT5MapUpdate]]
+[[Find the last painting.->PAINT6Approach]]
+
+
+:: PAINT5Fact {"position":"760,780","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — fire,” Anthony says.
+“Fire followed my name all my life. Long ago there was a terrible sickness that burned people's skin, and they even called it ‘Saint Anthony's Fire.’ Sick and frightened people came to me, and prayed to be saved from it.”
+Then the guide adds a fact: “And here is something special — this little gold painting is one of the ''oldest'' works in the whole museum, almost seven hundred years old, much older than everything else you have met today.”
+
+[[Bring him home.->PAINT5Church]]
+
+
+:: PAINT5MapUpdate {"position":"1200,780","size":"160,120"}
+<div id="dynamic-map" data-progress="4" style="height: 400px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #ddd;"></div>
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        // Read progress string and parse into an integer smoothly
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+        // HARD BOUNDARIES: Locked zoom between 14 and 16, disabled double-click zoom
+        var map = L.map('dynamic-map', {
+            minZoom: 14,
+            maxZoom: 16,
+            doubleClickZoom: false
+        }).setView([44.49513, 11.34077], 14);
+
+        // Retro Parchment/Grey-scale Basemap Layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Marker Styles ---
+        var awakeStyle = {
+            color: '#D4AF37',     // Metallic Gold Border
+            fillColor: '#FFD700', // Bright Gold Fill
+            fillOpacity: 0.9,
+            radius: 9,
+            weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50',     // Dark Slate Blue Border for high contrast
+            fillColor: '#7F8C8D', // Solid Muted Charcoal Grey
+            fillOpacity: 0.75,
+            radius: 7,
+            weight: 2
+        };
+
+        // --- Database of 5 historic churches ---
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                popupText: "<b>Painting 1: Saint Cecilia</b><br>San Giovanni in Monte<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                popupText: "<b>Painting 2: Saint Paul</b><br>Basilica of San Francesco<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                popupText: "<b>Painting 3: Saint William</b><br>Santi Gregorio e Siro<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                popupText: "<b>Painting 4: Saint Anthony</b><br>Sant'Antonio Abate<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                popupText: "<b>Painting 5: Innocent Children</b><br>Basilica of San Domenico<br><i>Status: Awakened!</i>"
+            }
+        ];
+
+        // --- App Starting Point (Gallery Hub) ---
+        var galleryCoords = [44.49754, 11.35239];
+        
+        // Background anchor ring for Gallery Hub
+        L.circleMarker(galleryCoords, { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        
+        L.circleMarker(galleryCoords, {
+            color: '#1A252F',
+            fillColor: '#2C3E50',
+            fillOpacity: 0.9,
+            radius: 7,
+            weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+        // --- Render States Loop ---
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                // 1. Awakened State: Only renders the golden marker, NO polyline link
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(church.popupText);
+            } 
+            else {
+                // 2. Locked State: Renders outer anchor ring and solid grey core marker
+                L.circleMarker(church.coords, {
+                    color: '#BDC3C7',
+                    weight: 1,
+                    radius: 11,
+                    fill: false
+                }).addTo(map);
+
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<b>Locked Memory</b><br>Keep exploring to reveal these coordinates.");
+            }
+        });
+    }
+}, 350);
+</script>
+''SCREEN:'' //The map: four lights, one dark dot.//
+''MEDIA:'' //Map, 4 lit / 1 dark. The last dot pulses slowly.//
+
+Four lights now. Only one dot is still dark.
+“Almost there,” her voice says, soft and serious. “One painting is still sleeping. It is the hardest one to look at. Are you ready?”
+
+[[Yes. Show me the last one.->PAINT6Approach]]
+
+
+:: PAINT5Question {"position":"320,780","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="sofia-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/Vitale-da-Bologna-Guarigione-di-Sofia-Web.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center 75%;">
+        <div class="sofia-center-glow"></div>
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.3);
+        }
+    }
+
+    .sofia-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+    @keyframes softHighlightFlash {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+</style>“Look at the very bottom of the painting,” Anthony says.
+“Below all the people, something bright and hot is burning. What is it?”
+You lean in and look at the real painting on the wall.
+
+[[Water.->PAINT5Retry]]
+[[Fire.->PAINT5Fact]]
+[[Flowers.->PAINT5Retry]]
+
+
+:: PAINT5Retry {"position":"550,775","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="sofia-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/Vitale-da-Bologna-Guarigione-di-Sofia-Web.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center 75%;">
+        <div class="sofia-center-glow"></div>
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.3);
+        }
+    }
+
+    .sofia-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+    @keyframes softHighlightFlash {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .sofia-center-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.7) 0%, rgba(255, 253, 247, 0.2) 40%, transparent 70%);
+        mix-blend-mode: screen;
+        pointer-events: none;
+        opacity: 0;
+        animation: softHighlightFlash 2.5s ease-in-out 4.5s forwards;
+    }
+</style>
+“Look again,” he says gently.
+“Right at the bottom, orange and hot — flames.”
+
+[[Look again.->PAINT5Question]]
+
+
+:: PAINT5Story {"position":"100,780","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="sofia-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/Vitale-da-Bologna-Guarigione-di-Sofia-Web.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center 75%;">
+        <div class="sofia-center-glow"></div>
+    </div>
+</div>
+A calm, very old voice speaks, slow and kind.
+“Hello. I am Anthony. Long, long ago I left the city and went to live alone in the desert, to be close to God. I was one of the very first men to do this. Out there, in the dark, demons came to test me — but I never ran away. A painter named Vitale da Bologna painted little stories from my life here, on gold, almost seven hundred years ago. I lived in the church of Sant'Antonio Abate, here in the city, before they brought me here.”
+A pause. “Look at me carefully. Down at the bottom of the painting, something is burning. Can you find it?”
+
+[[Look closer.->PAINT5Question]]
+
+
+:: PAINT6Approach {"position":"1425,775","size":"160,120"}
+''SCREEN:'' //A large, dramatic painting. Mothers, soldiers, fear — and two small angels above.//
+''MEDIA:'' //A simple arrow to the room. The music drops to almost nothing.//
+
+The guide leads you to the last room, slowly.
+“This one is full of pain,” she says. “Mothers, soldiers, and great fear. But look up to the top too — there is something gentle there. Take your time.”
+And there it is.
+
+[[Stand in front of it.->PAINT6Story]]
+
+
+:: PAINT6Fact {"position":"760,950","size":"160,120"}
+''SCREEN:'' //A small “fact card” slides onto the screen.//
+''MEDIA:'' //A “fact card” slides in. Soft unlock sound + a small haptic.//
+
+“Yes — palm leaves,” the voice says.
+“A palm leaf is an old sign of someone who is remembered forever. The angels are saying that these innocent children are not lost. They are little saints now. That is the secret of this sad painting: even here, there is light.”
+Then the guide adds one last fact: “The church it came from, San Domenico, holds a famous tomb — and a young Michelangelo, before he was famous, carved part of it with his own hands.”
+
+[[Bring it home.->PReveal]]
+
+
+:: PAINT6Question {"position":"325,950","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="strage-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/STRAGE%20DEGLI%20INNOCENTI.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center top;">
+        <div class="strage-top-glow"></div>
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .strage-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+</style>“Look up, at the very top,” the voice says.
+“Two small angels float there, above all the fear. What do they hold in their hands?”
+You lean in and look at the real painting.
+
+[[Green palm leaves.->PAINT6Fact]]
+[[Golden swords.->PAINT6Retry]]
+[[Baskets of bread.->PAINT6Retry]]
+
+
+:: PAINT6Retry {"position":"540,950","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="strage-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/STRAGE%20DEGLI%20INNOCENTI.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center top;">
+        <div class="strage-top-glow"></div>
+    </div>
+</div>
+
+<style>
+    @keyframes pureSlowZoom {
+        0% {
+            transform: scale(1.0);
+        }
+        100% {
+            transform: scale(1.25);
+        }
+    }
+
+    .strage-cinema-zoom {
+        animation: pureSlowZoom 9.0s cubic-bezier(0.15, 0.85, 0.45, 1) 1.2s forwards;
+    }
+
+    @keyframes softHighlightFlash {
+        0% {
+            opacity: 0;
+        }
+        30% {
+            opacity: 1;
+        }
+        70% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .strage-top-glow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50%;
+        background: radial-gradient(circle at center top, rgba(212, 175, 55, 0.7) 0%, rgba(255, 253, 247, 0.2) 40%, transparent 70%);
+        mix-blend-mode: screen;
+        pointer-events: none;
+        opacity: 0;
+        animation: softHighlightFlash 2.5s ease-in-out 4.5s forwards;
+    }
+</style>“Look again,” the voice says gently.
+“High above the soldiers, in the angels' hands — something green and soft, not a weapon.”
+
+[[Look again.->PAINT6Question]]
+
+
+:: PAINT6Story {"position":"100,950","size":"160,120"}
+<div style="text-align: center; margin: 5px 0;">
+    <div style="display: inline-block; position: relative; overflow: hidden; border-radius: 2px; border: 1px solid #d4af37; font-size: 0;">
+        <img class="strage-cinema-zoom" 
+             src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/STRAGE%20DEGLI%20INNOCENTI.jpg" 
+             style="max-width: 100%; height: auto; display: block; margin: 0; transform-origin: center top;">
+        <div class="strage-top-glow"></div>
+    </div>
+</div>
+A gentle voice speaks, careful and sad.
+“Hello. I am hard to look at, I know. I show a terrible day: a cruel king sent his soldiers to harm the youngest children, and the mothers could do nothing but cry and run. A painter named Guido Reni made me — and he made even this pain beautiful, so the world would never forget it. I hung in the great Basilica di San Domenico, until they brought me here.”
+A pause. “Look at me carefully. The painting is dark — but at the very top, there is hope. Can you find it?”
+
+[[Look closer.->PAINT6Question]]
+
+
+:: PEnd [museum-bg] {"position":"320,1120","size":"160,120"}
+“They took us from the city,” the voices say, “and the city forgot. But you walked in. You looked closer. You remembered. Thank you for bringing us home.”
+The room is quiet again. But it does not feel empty anymore.
+
+[[Start over->P0StreetHook]]
+
+
+:: PHomecoming {"position":"100,1120","size":"160,120"}
+<div id="dynamic-map" data-progress="5" style="height: 450px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #d4af37;"></div>
+
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+
+        var map = L.map('dynamic-map', {
+            minZoom: 13,
+            maxZoom: 17,
+            doubleClickZoom: false
+        }).setView([44.4940, 11.3430], 14);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        var awakeStyle = {
+            color: '#D4AF37', fillColor: '#FFD700', fillOpacity: 0.9, radius: 9, weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50', fillColor: '#7F8C8D', fillOpacity: 0.75, radius: 7, weight: 2
+        };
+
+
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                title: "ESTASI DI SANTA CECILIA FRA I SANTI PAOLO, GIOVANNI EVANGELISTA, AGOSTINO E MARIA MADDALENA",
+                img: "https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/ESTASI%20DI%20SANTA%20CECILIA%20FRA%20I%20SANTI%20PAOLO%2C%20GIOVANNI%20EVANGELISTA%2C%20AGOSTINO%20E%20MARIA%20MADDALENA.jpg",
+                link: "https://pinacotecabologna.cultura.gov.it/opere-darte/estasi-di-santa-cecilia-fra-i-santi-paolo-giovanni-evangelista-agostino-e-maria-maddalena-361" 
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                title: "CONVERSIONE DI SAN PAOLO",
+                img: "https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/CONVERSIONE%20DI%20SAN%20PAOLO.jpg",
+                link: "https://pinacotecabologna.cultura.gov.it/opere-darte/conversione-di-sanpaolo"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                title: "VESTIZIONE DI SAN GUGLIELMO",
+                img: "https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/VESTIZIONE%20DI%20SAN%20GUGLIELMO.jpg",
+                link: "https://pinacotecabologna.cultura.gov.it/opere-darte/padre-eterno"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                title: "STORIE DI SANT’ANTONIO ABATE",
+                img: "https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/Vitale-da-Bologna-Guarigione-di-Sofia-Web.jpg",
+                link: "https://pinacotecabologna.cultura.gov.it/opere-darte/storie-di-sant-antonio-abate_446-932"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                title: "STRAGE DEGLI INNOCENTI",
+                img: "https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/STRAGE%20DEGLI%20INNOCENTI.jpg",
+                link: "https://pinacotecabologna.cultura.gov.it/opere-darte/strage-degli-innocenti-847"
+            }
+        ];
+
+
+        L.circleMarker([44.49754, 11.35239], { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        L.circleMarker([44.49754, 11.35239], {
+            color: '#1A252F', fillColor: '#2C3E50', fillOpacity: 0.9, radius: 7, weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                var popupHTML = `
+                    <div style="text-align: center; min-width: 160px; font-family: 'Georgia', serif;">
+                        <b style="color: #2c3e50; font-size: 13px; line-height: 1.2; display: block; margin-bottom: 2px;">${church.name}</b>
+                        <i style="font-size: 11px; color: #d4af37;">${church.title}</i><br>
+                        
+                        <img src="${church.img}" style="width: 100%; max-width: 180px; height: auto; margin: 8px 0; border-radius: 2px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <br>
+                        
+                        <a href="${church.link}" target="_blank" style="display: inline-block; background-color: #2c3e50; color: #fffdf7; padding: 5px 10px; text-decoration: none; border-radius: 3px; font-size: 11px; margin-bottom: 4px; border: 1px solid #1a252f; transition: background 0.3s;">
+                            Explore More ↗
+                        </a>
+                    </div>
+                `;
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(popupHTML);
+            } 
+            else {
+                L.circleMarker(church.coords, { color: '#BDC3C7', weight: 1, radius: 11, fill: false }).addTo(map);
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<div style='font-family: Georgia, serif; text-align: center;'><b>Locked Memory</b><br><span style='font-size: 12px; color: #7f8c8d;'>Keep exploring to reveal.</span></div>");
+            }
+        });
+    }
+}, 350);
+</script>“There is one more thing,” Cecilia says, one last time.
+“Now go outside. Walk the six minutes to my church. Stand in front of the empty wall, lift your phone — and watch me come home, just for a moment.”
+
+[[Take me to the nearest church.->PEnd]]
+[[Another day. But I will go.->PEnd]]
+
+
+:: PReveal {"position":"975,950","size":"160,120"}
+<div id="dynamic-map" data-progress="5" style="height: 400px; width: 100%; border-radius: 8px; margin: 5px 0; z-index: 1; border: 1px solid #ddd;"></div>
+<script>
+setTimeout(function() {
+    var mapElement = document.getElementById('dynamic-map');
+    
+    if (typeof L !== 'undefined' && mapElement) {
+        
+        // Read progress string and parse into an integer smoothly
+        var currentProgress = parseInt(mapElement.getAttribute('data-progress'), 10);
+        if (isNaN(currentProgress)) { currentProgress = 0; }
+
+        // HARD BOUNDARIES: Locked zoom between 14 and 16, disabled double-click zoom
+        var map = L.map('dynamic-map', {
+            minZoom: 14,
+            maxZoom: 16,
+            doubleClickZoom: false
+        }).setView([44.49513, 11.34077], 14);
+
+        // Retro Parchment/Grey-scale Basemap Layer
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap, © CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // --- Marker Styles ---
+        var awakeStyle = {
+            color: '#D4AF37',     // Metallic Gold Border
+            fillColor: '#FFD700', // Bright Gold Fill
+            fillOpacity: 0.9,
+            radius: 9,
+            weight: 3
+        };
+
+        var sleepingStyle = {
+            color: '#2C3E50',     // Dark Slate Blue Border for high contrast
+            fillColor: '#7F8C8D', // Solid Muted Charcoal Grey
+            fillOpacity: 0.75,
+            radius: 7,
+            weight: 2
+        };
+
+        // --- Database of 5 historic churches ---
+        var churches = [
+            {
+                name: "Church of San Giovanni in Monte",
+                coords: [44.49182, 11.34861],
+                popupText: "<b>Painting 1: Saint Cecilia</b><br>San Giovanni in Monte<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Francesco",
+                coords: [44.49492, 11.33522],
+                popupText: "<b>Painting 2: Saint Paul</b><br>Basilica of San Francesco<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Santi Gregorio e Siro",
+                coords: [44.49591, 11.34246],
+                popupText: "<b>Painting 3: Saint William</b><br>Santi Gregorio e Siro<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Church of Sant'Antonio Abate",
+                coords: [44.49605, 11.33878],
+                popupText: "<b>Painting 4: Saint Anthony</b><br>Sant'Antonio Abate<br><i>Status: Awakened!</i>"
+            },
+            {
+                name: "Basilica of San Domenico",
+                coords: [44.48967, 11.34444],
+                popupText: "<b>Painting 5: Innocent Children</b><br>Basilica of San Domenico<br><i>Status: Awakened!</i>"
+            }
+        ];
+
+        // --- App Starting Point (Gallery Hub) ---
+        var galleryCoords = [44.49754, 11.35239];
+        
+        // Background anchor ring for Gallery Hub
+        L.circleMarker(galleryCoords, { color: '#000', weight: 1, radius: 12, fill: false }).addTo(map);
+        
+        L.circleMarker(galleryCoords, {
+            color: '#1A252F',
+            fillColor: '#2C3E50',
+            fillOpacity: 0.9,
+            radius: 7,
+            weight: 2
+        }).addTo(map).bindPopup("<b>Pinacoteca Nazionale di Bologna</b><br>The Memory Hub.");
+
+        // --- Render States Loop ---
+        churches.forEach(function(church, index) {
+            if (index < currentProgress) {
+                // 1. Awakened State: Only renders the golden marker, NO polyline link
+                var dot = L.circleMarker(church.coords, awakeStyle).addTo(map);
+                dot.bindPopup(church.popupText);
+            } 
+            else {
+                // 2. Locked State: Renders outer anchor ring and solid grey core marker
+                L.circleMarker(church.coords, {
+                    color: '#BDC3C7',
+                    weight: 1,
+                    radius: 11,
+                    fill: false
+                }).addTo(map);
+
+                var dot = L.circleMarker(church.coords, sleepingStyle).addTo(map);
+                dot.bindPopup("<b>Locked Memory</b><br>Keep exploring to reveal these coordinates.");
+            }
+        });
+    }
+}, 350);
+</script>
+You wake the fifth painting. The last dark dot lights up. Then the map does something.
+One by one, lines stretch from every painting to every church — until the whole city is covered with light.
+Five paintings. Five homes. One Bologna. All five voices speak together, softly: “We are not old pictures on a wall. We are the memory of this city's lost churches. And today, you remembered us.”
+
+[[See your result.->PShare]]
+
+
+:: PShare {"position":"1200,950","size":"160,120"}
+''SCREEN:'' //A result card with the full glowing map and your name.//
+''MEDIA:'' //A shareable card. A live public counter.//
+
+The screen shows you a card: your full map, glowing, with one line under it — “I found the Secret Next Door.”
+“You are the 2,148th person to find the secret this month,” her voice says.
+“Show a friend. The next student walking past outside could be the one who brings the next painting home.”
+
+[[Share it.->PHomecoming]]
+[[Keep it for yourself.->PHomecoming]]
+
+
+:: StoryScript [script]
+
+var leafletCSS = document.createElement('link');
+leafletCSS.rel = 'stylesheet';
+leafletCSS.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+document.head.appendChild(leafletCSS);
+
+
+var leafletJS = document.createElement('script');
+leafletJS.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+document.head.appendChild(leafletJS);
+
+:: StoryStylesheet [stylesheet]
+
+tw-story {
+    background-color: #f4efe2; 
+    background-image: radial-gradient(#fffdf7 1px, transparent 0); 
+    background-size: 24px 24px;
+    color: #2c3e50; 
+    font-family: "Georgia", "Times New Roman", "Cambria", serif;
+    font-size: 115%;
+    line-height: 1.6;
+    
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: flex-start;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+tw-passage {
+    max-width: 680px; 
+    width: 90%;             
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #dcd5c5; 
+    border-top: 4px solid #d4af37; 
+    box-shadow: 0 10px 30px rgba(184, 172, 146, 0.25); 
+    border-radius: 4px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 10vh;       
+    margin-bottom: 5vh;
+}
+
+tw-passage em, tw-passage i {
+    color: #7f8c8d;
+    font-family: -apple-system, sans-serif; 
+    font-size: 0.9em;
+}
+
+tw-passage strong, tw-passage b {
+    color: #1a252f;
+    letter-spacing: 0.05em;
+    border-bottom: 1px dashed #d4af37;
+    padding-bottom: 2px;
+}
+
+tw-link {
+    color: #b8860b !important; 
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184, 134, 11, 0.4);
+    transition: all 0.25s ease-in-out;
+    padding: 2px 4px;
+}
+
+tw-link:hover {
+    color: #ffffff !important;
+    background-color: #d4af37; 
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+}
+
+tw-sidebar {
+    display: none;
+}
+
+.leaflet-popup-content-wrapper {
+    background-color: #fffdf7 !important;
+    color: #2c3e50 !important;
+    border-radius: 4px !important;
+    border-left: 4px solid #d4af37 !important; 
+    font-family: "Georgia", serif !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15) !important;
+}
+.leaflet-popup-tip {
+    background: #fffdf7 !important;
+}
+
+
+tw-story[tags~="street-bg"] {
+    background-image: url("https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+}
+
+tw-story[tags~="street-bg"] tw-passage {
+    background-color: rgba(255, 255, 255, 0.92) !important; 
+}
+
+tw-story[tags~="museum-bg"] {
+    background-image: url("https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/museum.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+}
+tw-story[tags~="museum-bg"] tw-passage {
+    background-color: rgba(255, 255, 255, 0.94) !important; 
+}
+
+
+tw-story[tags~="church1_bg"] {
+    background-image: url("https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/San_giovanni_in_monte.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+}
+tw-story[tags~="church1_bg"] tw-passage {
+    background-color: rgba(255, 255, 255, 0.92) !important; 
+}
+
+
+tw-story[tags~="church2_bg"] {
+    background-image: url("https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/san_francesco.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+}
+
+
+tw-story[tags~="church2_bg"] tw-passage {
+    background-color: rgba(255, 255, 255, 0.92) !important; 
+}
+
+
+tw-story[tags~="church3_bg"] {
+    background-image: url("https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/Chiesa_dei_SS._Gregorio_e_Siro_(Bologna).jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+}
+
+tw-story[tags~="church3_bg"] tw-passage {
+    background-color: rgba(255, 255, 255, 0.92) !important; 
+}
+
+
+tw-story[tags~="church4_bg"] {
+    background-image: url("https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/sacro-cuore-fabio-fabbi-bologna-archivio-fabio-fabbi.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+}
+
+
+tw-story[tags~="church4_bg"] tw-passage {
+    background-color: rgba(255, 255, 255, 0.92) !important; 
+}
