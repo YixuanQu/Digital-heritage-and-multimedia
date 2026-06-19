@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     THE SECRET NEXT DOOR — Project Website
+     Group: GGU (Global Girlies United)
+     Course: Digital Heritage and Multimedia
+     One single page with five parts:
+     Home, Presentation, Twine, Figma, Design Brief.
+     All text and comments are in simple English.
+     ============================================================ -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Secret Next Door — GGU</title>
+    <meta name="description"
+          content="A hybrid exhibition experience for the Pinacoteca Nazionale di Bologna." />
+
+    <!-- Elegant serif fonts: Cormorant for titles, EB Garamond for text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ============ TOP NAVIGATION BAR ============ -->
+    <nav class="navbar">
+        <!-- Two links: the title goes to Home, the group name goes to About -->
+        <div class="brand">
+            <a href="#home" class="brand-title">The Secret Next Door</a>
+            <a href="#about" class="brand-group">GGU · Global Girlies United</a>
+        </div>
+
+        <!-- button for phones (opens the menu) -->
+        <button class="menu-toggle" aria-label="Open menu">&#9776;</button>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#presentation">Presentation</a></li>
+            <li><a href="#twine">Twine</a></li>
+            <li><a href="#figma">Figma</a></li>
+            <li><a href="design-brief.html">Design Brief</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============ 1. HOME (HERO) ============ -->
+    <header id="home" class="hero">
+        <h1>The Secret Next Door</h1>
+        <p class="subtitle">A Hybrid Exhibition Experience for the Pinacoteca Nazionale di Bologna</p>
+
+        <p class="anchor-quote">
+            "These paintings were taken from the city — and the city forgot.
+            Bring them home."
+        </p>
+
+        <div class="btn-row">
+            <a href="#twine" class="btn btn-primary">Play the Story</a>
+            <a href="design-brief.html" class="btn btn-ghost">Read the Design Brief</a>
+        </div>
+
+        <!-- this badge links down to the About section -->
+        <a href="#about" class="group-tag">Group GGU — Global Girlies United</a>
+    </header>
+
+    <!-- Short intro + star paintings -->
+    <section class="stars-strip">
+        <h2>Five paintings. Five lost churches. One secret.</h2>
+        <p class="section-intro">
+            Almost all the paintings in the Pinacoteca did not start there.
+            About 200 years ago, under Napoleon, the churches of Bologna were closed,
+            and their paintings were carried into one building. Our project helps people
+            find these works again and bring them "home" on a city map.
+        </p>
+
+        <div class="stars-grid">
+            <!-- Each card is one star painting and its original church -->
+            <div class="star-card">
+                <img src="img/ESTASI DI SANTA CECILIA FRA I SANTI PAOLO, GIOVANNI EVANGELISTA, AGOSTINO E MARIA MADDALENA.jpg"
+                     alt="Ecstasy of Saint Cecilia by Raphael" />
+                <div class="star-text">
+                    <h3>Ecstasy of Saint Cecilia</h3>
+                    <p>Raphael — from San Giovanni in Monte</p>
+                </div>
+            </div>
+
+            <div class="star-card">
+                <img src="img/CONVERSIONE DI SAN PAOLO.jpg"
+                     alt="Conversion of Saint Paul by Ludovico Carracci" />
+                <div class="star-text">
+                    <h3>Conversion of Saint Paul</h3>
+                    <p>Ludovico Carracci — from San Francesco</p>
+                </div>
+            </div>
+
+            <div class="star-card">
+                <img src="img/VESTIZIONE DI SAN GUGLIELMO.jpg"
+                     alt="Investiture of Saint William by Guercino" />
+                <div class="star-text">
+                    <h3>Investiture of Saint William</h3>
+                    <p>Guercino — from SS. Gregorio e Siro</p>
+                </div>
+            </div>
+
+            <div class="star-card">
+                <img src="img/SAN BRUNO ADORA LA MADONNA COL BAMBINO IN GLORIA.jpg"
+                     alt="Saint Bruno Adoring the Madonna by Guercino" />
+                <div class="star-text">
+                    <h3>Saint Bruno and the Madonna</h3>
+                    <p>Guercino — from the Certosa</p>
+                </div>
+            </div>
+
+            <div class="star-card">
+                <img src="img/STRAGE DEGLI INNOCENTI.jpg"
+                     alt="Massacre of the Innocents by Guido Reni" />
+                <div class="star-text">
+                    <h3>Massacre of the Innocents</h3>
+                    <p>Guido Reni — from San Domenico</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 2. PRESENTATION ============ -->
+    <section id="presentation" class="section">
+        <h2 class="section-title">Presentation</h2>
+        <p class="section-intro">
+            Our project slides explain the idea, the problem, and the design in a short way.
+        </p>
+
+        <div class="card">
+            <!-- HOW TO USE:
+                 Replace the "src" below with your own embed link.
+                 - Google Slides: File > Share > Publish to web > Embed, then copy the link.
+                 - Canva: Share > More > Embed.
+                 Keep the rest of this block the same. -->
+            <div class="embed-frame">
+                <iframe
+                    src="about:blank"
+                    title="Project presentation slides"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="placeholder-note">
+                Add your presentation embed link in <code>index.html</code> (Presentation section).
+            </p>
+        </div>
+    </section>
+
+    <!-- ============ 3. TWINE (INTERACTIVE STORY) ============ -->
+    <section id="twine" class="section">
+        <h2 class="section-title">Twine — The Interactive Story</h2>
+        <p class="section-intro">
+            Walk the streets of Bologna, step into the museum, and find five paintings.
+            Each one tells you which church it came from. Fill the map and uncover the secret.
+        </p>
+
+        <div class="card">
+            <!-- HOW TO USE:
+                 In the Twine editor: Publish to File. This makes one HTML file.
+                 Save that file as "story.html" in this project folder.
+                 The iframe below will then load the playable story. -->
+            <div class="embed-frame">
+                <iframe
+                    src="story.html"
+                    title="The Secret Next Door interactive story"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="placeholder-note">
+                Publish the Twine to <code>story.html</code> in this folder to play it here.
+            </p>
+            <div class="btn-row">
+                <a href="story.html" target="_blank" class="btn btn-primary">Open Story in New Tab</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ 4. FIGMA ============ -->
+    <section id="figma" class="section">
+        <h2 class="section-title">Figma — UI Design</h2>
+        <p class="section-intro">
+            The phone screens that guide the visitor: the map, the painting scenes, and the ending.
+        </p>
+
+        <div class="card">
+            <!-- HOW TO USE:
+                 In Figma: Share > Copy link. Then use the embed form:
+                 https://www.figma.com/embed?embed_host=share&url=YOUR_FIGMA_LINK
+                 Paste the full embed URL in the "src" below. -->
+            <div class="embed-frame">
+                <iframe
+                    src="about:blank"
+                    title="Figma design file"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="placeholder-note">
+                Add your Figma embed link in <code>index.html</code> (Figma section).
+            </p>
+        </div>
+    </section>
+
+    <!-- ============ ABOUT / TEAM ============ -->
+    <!-- Each member can add a photo: save it in the img/ folder with the
+         exact file name shown in the "src" below (for example team-kubra.jpg).
+         If a photo is missing, the member's first letter is shown instead. -->
+    <section id="about" class="about">
+        <div class="inner">
+            <h2 class="section-title">About Us</h2>
+            <p class="section-intro">
+                We are Group GGU — Global Girlies United — four students who designed
+                The Secret Next Door for the Digital Heritage and Multimedia course.
+            </p>
+
+            <div class="team-grid">
+                <div class="member">
+                    <div class="member-photo" data-initial="P">
+                        <img src="img/team-polyxeni.jpg" alt="Polyxeni Chasanai"
+                             onerror="this.style.display='none'" />
+                    </div>
+                    <h3>Polyxeni Chasanai</h3>
+                    <p>Visual Designer</p>
+                </div>
+
+                <div class="member">
+                    <div class="member-photo" data-initial="K">
+                        <img src="img/kubra.jpg" alt="Kübra Topçuoğlu"
+                             onerror="this.style.display='none'" />
+                    </div>
+                    <h3>Kübra Topçuoğlu</h3>
+                    <p>Narrative Concepts Designer<br />Prototype Designer / Technical Lead</p>
+                </div>
+
+                <div class="member">
+                    <div class="member-photo" data-initial="Y">
+                        <img src="img/team-yixuan.jpg" alt="Yixuan Qu"
+                             onerror="this.style.display='none'" />
+                    </div>
+                    <h3>Yixuan Qu</h3>
+                    <p>Experience &amp; Interaction Designer</p>
+                </div>
+
+                <div class="member">
+                    <div class="member-photo" data-initial="S">
+                        <img src="img/team-saya.jpg" alt="Saya Saito"
+                             onerror="this.style.display='none'" />
+                    </div>
+                    <h3>Saya Saito</h3>
+                    <p>Research &amp; Content Lead (Co-design)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <h3>Group GGU — Global Girlies United</h3>
+        <div class="members">
+            Polyxeni Chasanai · Kübra Topçuoğlu · Yixuan Qu · Saya Saito
+        </div>
+        <p class="small">
+            Digital Heritage and Multimedia — The Secret Next Door ·
+            Pinacoteca Nazionale di Bologna
+        </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

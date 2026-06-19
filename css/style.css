@@ -1,0 +1,767 @@
+/* ============================================================
+   THE SECRET NEXT DOOR — Website Stylesheet
+   Group: GGU (Global Girlies United)
+   Theme: a quiet museum at dusk — warm ivory, espresso dark,
+   and a soft antique amber (not a bright, cheap yellow).
+   All comments are written in simple English.
+   ============================================================ */
+
+/* ---- 1. Color and font variables ---- */
+:root {
+    /* warm light tones for reading areas */
+    --paper: #f7f1e6;        /* warm ivory background */
+    --paper-alt: #efe6d6;    /* a little deeper, for strips */
+    --card: #fffdf9;         /* almost white card color */
+
+    /* text */
+    --ink: #2c241b;          /* warm dark brown for text */
+    --ink-strong: #1a140d;   /* near-black for titles */
+    --muted: #8a7c66;        /* soft brown-grey for small notes */
+
+    /* the new accent: a soft antique amber / brass */
+    --accent: #b4823c;       /* main amber, calm and warm */
+    --accent-soft: #d2a25c;  /* lighter amber for hover */
+    --accent-tint: rgba(180, 130, 60, 0.12);
+
+    /* dark espresso tones for hero / navbar / footer */
+    --dark: #17110a;         /* deep warm near-black */
+    --dark-90: rgba(23, 17, 10, 0.92);
+
+    --border: #e2d6bf;       /* soft warm border */
+    --shadow: rgba(80, 60, 30, 0.16);
+
+    /* fonts: elegant serif for titles, classic serif for text */
+    --display: "Cormorant Garamond", "Georgia", serif;
+    --body: "EB Garamond", "Georgia", "Times New Roman", serif;
+    --sans: -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---- 2. Basic reset ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;       /* smooth scroll when we click a nav link */
+    scroll-padding-top: 80px;      /* leave room for the fixed navbar */
+}
+
+body {
+    font-family: var(--body);
+    color: var(--ink);
+    background-color: var(--paper);
+    line-height: 1.75;
+    font-size: 20px;               /* EB Garamond is small, so we go a bit bigger */
+}
+
+/* ---- 3. Top navigation bar (fixed on top) ---- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    background-color: var(--dark-90);
+    border-bottom: 1px solid var(--accent);
+    backdrop-filter: blur(6px);
+}
+
+/* the brand has two links: the title and the group name */
+.navbar .brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.navbar .brand-title {
+    color: var(--paper);
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+}
+
+/* the group name scrolls to the About section */
+.navbar .brand-group {
+    color: var(--accent-soft);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    margin-top: 2px;
+    transition: color 0.2s ease;
+}
+
+.navbar .brand-group:hover {
+    color: var(--paper);
+    text-decoration: underline;
+}
+
+/* the list of links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 6px;
+}
+
+.nav-links a {
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border-radius: 3px;
+    transition: all 0.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: var(--accent);
+    color: var(--card);
+}
+
+/* hamburger button (only shown on small screens) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--paper);
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* ---- 4. Section base style ---- */
+.section {
+    padding: 96px 24px;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--display);
+    font-size: 46px;
+    font-weight: 600;
+    color: var(--ink-strong);
+    text-align: center;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+}
+
+/* small amber line under each title */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 64px;
+    height: 2px;
+    background-color: var(--accent);
+    margin: 16px auto 0;
+}
+
+.section-intro {
+    text-align: center;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto 44px;
+    font-style: italic;
+    font-size: 21px;
+}
+
+/* ---- 5. HOME / hero ---- */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 70px;
+    position: relative;
+    color: var(--paper);
+    /* the night street photo + a soft dark layer so the text is easy to read */
+    background:
+        linear-gradient(rgba(20, 14, 8, 0.45), rgba(20, 14, 8, 0.72)),
+        url("../img/street-hook.jpeg") center/cover no-repeat;
+    background-attachment: fixed;
+}
+
+.hero h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 78px;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.hero .subtitle {
+    font-style: italic;
+    font-size: 24px;
+    color: var(--accent-soft);
+    margin-top: 14px;
+    max-width: 640px;
+}
+
+.hero .anchor-quote {
+    font-family: var(--display);
+    max-width: 640px;
+    margin: 30px auto 0;
+    font-size: 26px;
+    line-height: 1.5;
+    font-style: italic;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* group name shown on the hero — it is a link to the About section */
+.hero .group-tag {
+    display: inline-block;
+    margin-top: 34px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    border: 1px solid var(--accent-soft);
+    border-radius: 30px;
+    padding: 9px 22px;
+    transition: all 0.25s ease;
+}
+
+.hero .group-tag:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--card);
+}
+
+/* ---- 6. Buttons ---- */
+.btn-row {
+    margin-top: 38px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 30px;
+    border-radius: 3px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--accent);
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: var(--card);
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-soft);
+    border-color: var(--accent-soft);
+}
+
+.btn-ghost {
+    background-color: transparent;
+    color: var(--paper);
+}
+
+.btn-ghost:hover {
+    background-color: var(--accent);
+    color: var(--card);
+}
+
+/* ---- 7. Star paintings strip on the home page ---- */
+.stars-strip {
+    background-color: var(--paper-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 70px 24px;
+}
+
+.stars-strip h2 {
+    font-family: var(--display);
+    text-align: center;
+    color: var(--ink-strong);
+    margin-bottom: 6px;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.stars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.star-card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.star-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 34px var(--shadow);
+}
+
+.star-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+}
+
+.star-card .star-text {
+    padding: 16px 18px;
+    border-top: 2px solid var(--accent);
+}
+
+.star-card .star-text h3 {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink-strong);
+}
+
+.star-card .star-text p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* ---- 8. Cards and embeds (Presentation, Twine, Figma) ---- */
+.card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 30px;
+    margin-bottom: 24px;
+}
+
+/* the frame that holds an iframe (16:9 video shape) */
+.embed-frame {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;   /* 16:9 ratio */
+    background-color: var(--dark);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.embed-frame iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* a note shown when a link is not added yet */
+.placeholder-note {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 14px;
+}
+
+.placeholder-note code {
+    background-color: var(--accent-tint);
+    padding: 1px 6px;
+    border-radius: 3px;
+}
+
+/* ---- 9. Design Brief section ---- */
+.brief-block {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 26px 30px;
+    margin-bottom: 22px;
+}
+
+/* small grey number for the paper sections, e.g. "1." */
+.brief-block h3 {
+    font-family: var(--display);
+    color: var(--ink-strong);
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.brief-block h4 {
+    font-family: var(--sans);
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 18px 0 8px;
+}
+
+.brief-block p {
+    margin-bottom: 10px;
+}
+
+.brief-block ul,
+.brief-block ol {
+    margin: 8px 0 8px 24px;
+}
+
+.brief-block li {
+    margin-bottom: 6px;
+}
+
+/* simple table for the assets and layers */
+.brief-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 16px;
+}
+
+.brief-table th,
+.brief-table td {
+    border: 1px solid var(--border);
+    padding: 10px 13px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.brief-table th {
+    background-color: var(--ink-strong);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.brief-table tr:nth-child(even) td {
+    background-color: #faf4e8;
+}
+
+/* two columns for goals etc. */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* figure placeholder boxes (for the flow / swimlane / journey diagrams) */
+.figure {
+    margin: 16px 0;
+    text-align: center;
+}
+
+.figure .figure-box {
+    border: 2px dashed var(--accent);
+    background-color: var(--accent-tint);
+    border-radius: 4px;
+    padding: 40px 20px;
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 14px;
+}
+
+.figure img {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+.figure figcaption {
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* keywords / small chips */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.chips span {
+    font-family: var(--sans);
+    font-size: 13px;
+    background-color: var(--accent-tint);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    padding: 4px 14px;
+}
+
+/* ---- empty "to be filled later" fields (Design Brief page) ---- */
+/* a faint hint label */
+.todo {
+    color: #b7a784;
+    font-style: italic;
+    font-family: var(--sans);
+    font-size: 13px;
+}
+
+/* a single empty dotted line (for short answers) */
+.blank-line {
+    display: block;
+    border-bottom: 1px dotted #c8b99d;
+    height: 26px;
+    margin: 6px 0;
+}
+
+/* a bigger empty box (for paragraphs) */
+.blank-area {
+    border: 1px dashed var(--border);
+    background-color: #fbf7ee;
+    border-radius: 4px;
+    min-height: 90px;
+    margin: 8px 0;
+}
+
+/* a small banner at the top of the page */
+.notice {
+    max-width: 1040px;
+    margin: 0 auto 10px;
+    background-color: var(--accent-tint);
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    padding: 12px 18px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--ink);
+    text-align: center;
+}
+
+/* empty table cells get a soft background */
+.brief-table td.empty {
+    background-color: #fbf7ee;
+}
+
+/* small reference list */
+.ref-list {
+    font-size: 16px;
+    margin-left: 22px;
+}
+
+.ref-list li {
+    margin-bottom: 8px;
+}
+
+/* ---- 10. Journey steps (small timeline) ---- */
+.journey {
+    list-style: none;
+    counter-reset: step;
+    margin-left: 16px !important;
+}
+
+.journey li {
+    position: relative;
+    padding: 10px 0 10px 52px;
+    border-left: 2px solid var(--accent);
+    margin-left: 16px;
+}
+
+.journey li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: -18px;
+    top: 8px;
+    width: 34px;
+    height: 34px;
+    background-color: var(--accent);
+    color: var(--card);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.journey li strong {
+    color: var(--ink-strong);
+}
+
+/* ---- 10b. About / team section ---- */
+.about {
+    background-color: var(--paper-alt);
+    border-top: 1px solid var(--border);
+    padding: 90px 24px;
+}
+
+.about .inner {
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.about p.lead {
+    text-align: center;
+    color: var(--ink);
+    max-width: 720px;
+    margin: 0 auto 44px;
+    font-size: 21px;
+}
+
+/* the grid of team members */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.member {
+    text-align: center;
+}
+
+/* round photo frame.
+   If the photo file is missing, the member's initial is shown instead. */
+.member-photo {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background-color: var(--accent-tint);
+    border: 2px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* the big initial behind the photo */
+.member-photo::before {
+    content: attr(data-initial);
+    font-family: var(--display);
+    font-size: 60px;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* the photo covers the circle when it loads */
+.member-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member h3 {
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink-strong);
+}
+
+.member p {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* ---- 11. Footer ---- */
+.footer {
+    background-color: var(--dark);
+    color: var(--paper);
+    text-align: center;
+    padding: 56px 24px;
+    border-top: 1px solid var(--accent);
+}
+
+.footer h3 {
+    font-family: var(--display);
+    color: var(--accent-soft);
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    letter-spacing: 0.03em;
+}
+
+.footer .members {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 2;
+}
+
+.footer .small {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 18px;
+    font-family: var(--sans);
+}
+
+/* ---- 12. Responsive (small screens / phones) ---- */
+@media (max-width: 760px) {
+    body { font-size: 18px; }
+
+    .hero h1 { font-size: 48px; }
+    .hero .anchor-quote { font-size: 21px; }
+    .hero .subtitle { font-size: 20px; }
+
+    .section-title { font-size: 36px; }
+
+    .menu-toggle { display: block; }
+
+    /* hide the links by default on phones */
+    .nav-links {
+        position: absolute;
+        top: 64px;
+        right: 0;
+        flex-direction: column;
+        background-color: var(--dark-90);
+        width: 220px;
+        padding: 10px;
+        gap: 4px;
+        border-bottom-left-radius: 6px;
+        border-left: 1px solid var(--accent);
+        display: none;
+    }
+
+    /* show the links when the menu is open */
+    .nav-links.open {
+        display: flex;
+    }
+
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+
+    /* let wide tables scroll sideways on phones */
+    .brief-block {
+        overflow-x: auto;
+    }
+}
