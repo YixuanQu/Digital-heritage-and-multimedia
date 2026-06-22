@@ -63,7 +63,12 @@
             <h4>Affiliation / Course / Institution</h4>
             <p>Digital Heritage and Multimedia — Group GGU (Global Girlies United)</p>
             <h4>Author emails</h4>
-            <div class="blank-line"></div>
+            <p>
+                Polyxeni Chasanai — <span class="todo">add email</span><br />
+                Kübra Topçuoğlu — kubra.topcuoglu@studio.unibo.it<br />
+                Yixuan Qu — <span class="todo">add email</span><br />
+                Saya Saito — <span class="todo">add email</span>
+            </p>
         </div>
 
         <!-- Abstract + keywords -->
@@ -79,7 +84,27 @@
         <div class="brief-block">
             <h3>1. Introduction and Design Problem</h3>
             <h4>1.1 Context of the project</h4>
-            <div class="blank-area"></div>
+            <p>
+                The Pinacoteca Nazionale di Bologna is the national art gallery of Bologna. It sits
+                in the quiet university quarter near Via Zamboni, inside an old Jesuit building, and
+                it holds some of the most important works of Italian and Bolognese art: Raphael's
+                <em>Ecstasy of Saint Cecilia</em>, dramatic Baroque scenes by Guido Reni, and
+                paintings by the Carracci family, Guercino, Parmigianino and others.
+            </p>
+            <p>
+                But there is one fact that most visitors never learn. Almost none of these paintings
+                were made for the museum. About 200 years ago, between 1797 and 1810, Napoleon's rule
+                closed the churches and convents of Bologna. Nearly a thousand paintings were taken
+                from those churches and brought together into one building, and that building became
+                the Pinacoteca. So the art is world-class, but the gallery is almost empty. In 2023 it
+                reached close to 100,000 visitors, which is very low for a national gallery that owns
+                a Raphael. Thousands of students walk past the door every day and never go inside.
+            </p>
+            <p>
+                Our project, <em>The Secret Next Door</em>, works with this real story. It tries to
+                bring people in, especially the students who are right next door, and to give every
+                painting back its story and its place in the city.
+            </p>
             <h4>1.2 Main pain points / problems the project aims to solve</h4>
             <table class="brief-table">
                 <thead>
@@ -90,9 +115,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
+                    <tr>
+                        <td>The gallery is "hidden" and under-visited. It feels calm and empty, and people walk past without entering.</td>
+                        <td>The museum itself, and the local students and tourists who never come in.</td>
+                        <td>The design needs a strong, simple reason to pull people through the door from the street.</td>
+                    </tr>
+                    <tr>
+                        <td>Information inside is mostly in Italian, with limited English. Foreign visitors cannot fully understand the works.</td>
+                        <td>International tourists and young travellers.</td>
+                        <td>The experience must remove the language barrier with a multilingual, easy guide.</td>
+                    </tr>
+                    <tr>
+                        <td>The paintings feel silent and disconnected. They look like random old pictures and are easy to forget.</td>
+                        <td>All visitors, especially people with no art background.</td>
+                        <td>The design needs storytelling that gives each work a voice and links the works together.</td>
+                    </tr>
+                    <tr>
+                        <td>The real story is not told: these works were taken from real churches across Bologna, but nobody explains this.</td>
+                        <td>The museum's heritage and the city's own memory.</td>
+                        <td>The design should reconnect each painting to its original home and to the city.</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -123,7 +165,22 @@
         <div class="brief-block">
             <h3>3. Method and Design Process</h3>
             <h4>3.1 Design method used</h4>
-            <div class="blank-area"></div>
+            <p>
+                We followed a user-centred and iterative design process. First we studied the museum,
+                its collection and its real problems, using the museum's own pages, news articles and
+                visitor reviews. Then we did a PACT analysis (People, Activities, Context,
+                Technologies) to understand who the audience is and where the experience happens. From
+                this we built one clear concept, "bring the paintings home", and turned it into an
+                experience loop and a few simple interaction rules. After that we wrote the full
+                experience as a branching story in Twine, screen by screen, and designed the visual
+                interface in Figma. Finally we tested the flow by walking through it as a visitor
+                would, and we fixed the steps that felt weak or confusing.
+            </p>
+            <p class="todo">
+                The table below only names each activity and points to the section where its result is
+                shown. The actual diagrams (user flowchart, swimlane chart, user journey map) are
+                placed in Sections 6 and 7, each as a figure with a caption.
+            </p>
             <table class="brief-table">
                 <thead>
                     <tr>
@@ -133,16 +190,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Concept design</td><td class="empty"></td><td>Section 4–5</td></tr>
-                    <tr><td>Game loop</td><td class="empty"></td><td>Section 5</td></tr>
-                    <tr><td>Game mechanics</td><td class="empty"></td><td>Section 5</td></tr>
-                    <tr><td>User flowchart</td><td class="empty"></td><td>Section 6</td></tr>
-                    <tr><td>Swimlane flowchart</td><td class="empty"></td><td>Section 6</td></tr>
-                    <tr><td>User journey map</td><td class="empty"></td><td>Section 7</td></tr>
+                    <tr><td>Concept design</td><td>One-sentence concept (the museum is the memory of Bologna's lost churches, and the visitor brings each painting home), with the audience, the context and the goals.</td><td>Section 4</td></tr>
+                    <tr><td>Experience loop</td><td>The cycle that repeats for every painting: approach, hear its story, answer one looking-question, get a fact, then light up its church on the map.</td><td>Section 5</td></tr>
+                    <tr><td>Interaction rules</td><td>Find the painting, answer one looking-question (hint and retry if wrong), unlock its church, fill the city map, reach 5 of 5, and share the result.</td><td>Section 5</td></tr>
+                    <tr><td>User flowchart</td><td>The step-by-step screen flow, from the street poster to the finale.</td><td>Section 6</td></tr>
+                    <tr><td>Swimlane flowchart</td><td>The same flow split between the actors: the visitor, the web app on the phone, and the museum.</td><td>Section 6</td></tr>
+                    <tr><td>User journey map</td><td>The experience over time, with the visitor's actions, emotions and touchpoints, from discovery to sharing.</td><td>Section 7</td></tr>
                 </tbody>
             </table>
             <h4>3.2 Data / materials used</h4>
-            <div class="blank-area"></div>
+            <p>
+                While designing the project we worked with a few kinds of material. From class we used
+                the PACT analysis and persona cards to study the audience. As museum sources we used
+                the official Pinacoteca pages (pinacotecabologna.cultura.gov.it) for each painting, the
+                museum's note about the 2024-2025 room redesign, and its public visitor numbers. We
+                also used our own observations: students pass the museum on Via Zamboni every day but
+                rarely go in, the rooms feel quiet and almost empty, and the English information is
+                limited. For background we read news and art articles about the Napoleonic closures of
+                the churches and about the paintings, and we collected photos of the five works and
+                their original churches. From these materials we then built the concept, the
+                interaction rules, the branching story in Twine and the interface in Figma.
+            </p>
         </div>
 
         <!-- 4. Design Brief tables -->
@@ -150,24 +218,51 @@
             <h3>4. Design Brief</h3>
             <table class="brief-table">
                 <tbody>
-                    <tr><th>Title</th><td class="empty"></td></tr>
-                    <tr><th>Type of application / game</th><td class="empty"></td></tr>
-                    <tr><th>Primary audience</th><td class="empty"></td></tr>
-                    <tr><th>Secondary audience</th><td class="empty"></td></tr>
-                    <tr><th>Primary persona</th><td class="empty"></td></tr>
-                    <tr><th>Secondary persona</th><td class="empty"></td></tr>
-                    <tr><th>Project focus / context</th><td class="empty"></td></tr>
+                    <tr><th>Title</th><td>The Secret Next Door: A Hybrid Exhibition Experience for the Pinacoteca Nazionale di Bologna.</td></tr>
+                    <tr><th>Type of application / experience</th><td>A hybrid exhibition experience. It is a story-based museum trail that runs in the web browser (a PWA, no download), using street posters, QR codes, voice narration and on-screen animations inside the museum and at the original churches.</td></tr>
+                    <tr><th>Primary audience</th><td>University students in Bologna, aged 18 to 28, who pass the museum every day but never go in.</td></tr>
+                    <tr><th>Secondary audience</th><td>International tourists and young travellers, aged 18 to 40, who need clear, multilingual and engaging context.</td></tr>
+                    <tr><th>Primary persona</th><td>Giulia, 22, a Bologna university student. She walks down Via Zamboni every day, lives on her phone, has little free time and no art background. She has always thought the gallery is "not for her".</td></tr>
+                    <tr><th>Secondary persona</th><td>Liam, 28, a tourist on a short city trip. He is curious about culture but gets frustrated when museum labels are only in Italian. He likes things that are quick, clear and easy to share.</td></tr>
+                    <tr><th>Project focus / context</th><td>A quiet university quarter; an indoor gallery with limited English information and short visit times; many original churches spread across the city; and a museum that is already redesigning its rooms to be more accessible.</td></tr>
                 </tbody>
             </table>
 
             <h4>Star assets</h4>
+            <p class="todo">
+                The five star works of the project. Each one is a famous painting that was taken from
+                a real Bologna church, and each one becomes a "home" on the Map of Exiles.
+            </p>
             <table class="brief-table">
                 <thead>
                     <tr><th>Star asset</th><th>Short description</th><th>Media / image</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Star asset 1</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Star asset 2</td><td class="empty"></td><td class="empty"></td></tr>
+                    <tr>
+                        <td>Raphael, <em>Ecstasy of Saint Cecilia</em></td>
+                        <td>The gallery's most famous work, and the face on the street poster. A woman lets the music of the world fall so she can listen to the music of heaven. It was taken from the church of San Giovanni in Monte.</td>
+                        <td><img src="img/ESTASI DI SANTA CECILIA FRA I SANTI PAOLO, GIOVANNI EVANGELISTA, AGOSTINO E MARIA MADDALENA.jpg" alt="Ecstasy of Saint Cecilia by Raphael" style="max-width:160px;height:auto;border-radius:4px;display:block;" /></td>
+                    </tr>
+                    <tr>
+                        <td>Ludovico Carracci, <em>Conversion of Saint Paul</em> (Conversione di Saulo)</td>
+                        <td>A scene full of movement: Saul falls from his horse, blinded by a light from the sky, and rises again as Paul. It was taken from the church of San Francesco.</td>
+                        <td><img src="img/CONVERSIONE DI SAN PAOLO.jpg" alt="Conversion of Saint Paul by Ludovico Carracci" style="max-width:160px;height:auto;border-radius:4px;display:block;" /></td>
+                    </tr>
+                    <tr>
+                        <td>Guercino, <em>Investiture of Saint William</em> (Vestizione di San Guglielmo)</td>
+                        <td>A duke kneels down and takes off his shining armour to be dressed as a simple monk. It was taken from the church of Santi Gregorio e Siro.</td>
+                        <td><img src="img/VESTIZIONE DI SAN GUGLIELMO.jpg" alt="Investiture of Saint William by Guercino" style="max-width:160px;height:auto;border-radius:4px;display:block;" /></td>
+                    </tr>
+                    <tr>
+                        <td>Vitale da Bologna, <em>Stories of Saint Anthony Abbot</em> (Storie di Sant'Antonio Abate)</td>
+                        <td>A small gold panel full of tiny figures, almost 700 years old and one of the oldest works in the whole museum. It was taken from the church of Sant'Antonio Abate.</td>
+                        <td><img src="img/Vitale-da-Bologna-Guarigione-di-Sofia-Web.jpg" alt="Stories of Saint Anthony Abbot by Vitale da Bologna" style="max-width:160px;height:auto;border-radius:4px;display:block;" /></td>
+                    </tr>
+                    <tr>
+                        <td>Guido Reni, <em>Massacre of the Innocents</em> (Strage degli innocenti)</td>
+                        <td>A dramatic Baroque scene full of fear, with two small angels holding palm leaves at the top as a sign of hope. It was taken from the Basilica di San Domenico.</td>
+                        <td><img src="img/STRAGE DEGLI INNOCENTI.jpg" alt="Massacre of the Innocents by Guido Reni" style="max-width:160px;height:auto;border-radius:4px;display:block;" /></td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -177,7 +272,17 @@
                     <tr><th>Institution / client</th><th>Institutional goals</th><th>Audience goals</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
+                    <tr>
+                        <td>Pinacoteca Nazionale di Bologna.</td>
+                        <td>
+                            1. Make its world-class collection known, visited and enjoyed by everyone, instead of staying a hidden secret.<br />
+                            2. Increase the accessibility and enjoyability of the rooms, continuing the 2024-2025 redesign, and finally reach the student audience next door.
+                        </td>
+                        <td>
+                            1. Get a clear reason to come in and an easy way to understand the works, with no art background needed.<br />
+                            2. Understand the works in their own language and feel a real connection between the art and the city.
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -187,8 +292,20 @@
                     <tr><th>Audience</th><th>Motivations</th><th>Barriers</th><th>Capabilities</th><th>Devices</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Primary audience</td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Secondary audience</td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr>
+                    <tr>
+                        <td>Primary audience (students)</td>
+                        <td>1. Curiosity about a "secret" right next to campus.<br />2. A short, fun and free activity they can share with friends.</td>
+                        <td>1. The feeling that the gallery is "not for them" and a bit boring.<br />2. Little free time and no art background.</td>
+                        <td>1. Very comfortable with smartphones and apps.<br />2. Used to QR codes and mobile web guides.<br />3. Active on social media.</td>
+                        <td>1. Their own smartphone.<br />2. Earphones for the voice narration.<br />3. A museum tablet, if they prefer.</td>
+                    </tr>
+                    <tr>
+                        <td>Secondary audience (tourists)</td>
+                        <td>1. Interest in real local culture and stories.<br />2. Nice photos and a result to share online.</td>
+                        <td>1. Limited English information inside the museum.<br />2. Short visit time, and many do not know the gallery exists.</td>
+                        <td>1. Used to digital and audio guides.<br />2. Comfortable choosing a language on a phone.<br />3. Able to follow a map and walk a city trail.</td>
+                        <td>1. Their own smartphone.<br />2. A museum tablet.<br />3. Earphones.</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -197,9 +314,43 @@
         <div class="brief-block">
             <h3>5. Design: Concept and Mechanics</h3>
             <h4>5.1 Main idea of the project / user experience</h4>
-            <div class="blank-area"></div>
+            <p>
+                The big idea is that every painting in the Pinacoteca is like an exile. Long ago it
+                lived in a real church in Bologna; during the Napoleonic period the churches were
+                closed and the works were carried into one building, and the city slowly forgot.
+                <em>The Secret Next Door</em> uses this true story.
+            </p>
+            <p>
+                Outside, on the streets and at the old churches, a faded poster with a QR code invites
+                you in. When you open it on your phone, the painting seems to "speak": "I used to live
+                here. They took me away. Come and find me." Inside, a multilingual web guide, with no
+                app to download, gives each painting its own voice and its story: which church it came
+                from, who made it, and why it is here now. The visitor walks from work to work, looks
+                closely at the real painting, answers one easy question about a detail, and "brings the
+                painting home". Each time, a new light appears on a <em>Map of Exiles</em>. Step by
+                step the map fills up with the city's lost churches. The visitor is not a passive
+                tourist anymore: they become the person who finally remembers the city's forgotten art.
+            </p>
             <h4>5.2 Winning / completion condition and scoring</h4>
-            <div class="blank-area"></div>
+            <p>
+                This is an exhibition experience, not a competitive game, so there are no points to
+                collect. The "win" is simply uncovering the secret. The mission is given at the very
+                start: "Five paintings were taken from real churches. Find them all and uncover the
+                secret." The completion condition is reaching <strong>5 of 5 homes found</strong>,
+                which means waking all five paintings and lighting every dot and line on the Map of
+                Exiles. Progress is always visible through a simple counter that climbs from 0/5 to
+                5/5, together with the growing map, so the visitor can see how close they are.
+            </p>
+            <p>
+                Each painting is "unlocked" by answering one easy looking-question about a detail in
+                the work. A wrong answer is never a punishment: it just gives a gentle hint and lets
+                the visitor try again, so nobody gets stuck. When all five homes connect, the finale
+                reveals the full secret and gives the visitor a shareable result card and a personal
+                number on a public counter ("you are the 2,148th person to find the secret this
+                month"). There is also one optional extra goal, the "homecoming": going outside to a
+                real church, where the phone shows the painting back in its old place on the now-empty
+                wall.
+            </p>
         </div>
 
         <!-- 6. User Flow, Interaction, Hybrid System -->
@@ -296,10 +447,10 @@
                     <tr><th>Team member</th><th>Role in project design</th><th>Role in writing the paper</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Polyxeni Chasanai</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Kübra Topçuoğlu</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Yixuan Qu</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Saya Saito</td><td class="empty"></td><td class="empty"></td></tr>
+                    <tr><td>Polyxeni Chasanai</td><td>Visual Designer</td><td class="empty"></td></tr>
+                    <tr><td>Kübra Topçuoğlu</td><td>Narrative Concepts Designer · Prototype Designer / Technical Lead</td><td>Sections 1, 3, 4 and 5</td></tr>
+                    <tr><td>Yixuan Qu</td><td>Experience &amp; Interaction Designer</td><td class="empty"></td></tr>
+                    <tr><td>Saya Saito</td><td>Research &amp; Content Lead</td><td class="empty"></td></tr>
                 </tbody>
             </table>
         </div>

@@ -48,8 +48,8 @@ You stop. The street is quiet. You want to know who she is.
 
 
 :: P1Threshold {"position":"540,100","size":"160,120"}
-''SCREEN:'' //A dark phone screen with her voice. A line of light on the ground points the way to the museum.//
-''MEDIA:'' //Dark screen + her voice. A glowing AR line on the pavement guides you. The building is revealed at the end.//
+''SCREEN:'' //A dark phone screen with her voice. A line of light on the screen points the way to the museum.//
+''MEDIA:'' //Dark screen + her voice. A glowing line on the phone screen guides you, like a route on a map. The building is revealed at the end.//
 
 Your phone hums as the code opens.
 No app, no download — just a dark screen and her voice, close, like she is standing next to you: “You came. Follow me. I am only around the corner.”
@@ -1455,7 +1455,7 @@ setTimeout(function() {
     }
 }, 350);
 </script>“There is one more thing,” Cecilia says, one last time.
-“Now go outside. Walk the six minutes to my church. Stand in front of the empty wall, lift your phone — and watch me come home, just for a moment.”
+“Now go outside. Walk the six minutes to my church. Stand in front of the empty wall, lift your phone, and see me back in my old place, just for a moment.”
 
 [[Take me to the nearest church.->PEnd]]
 [[Another day. But I will go.->PEnd]]
