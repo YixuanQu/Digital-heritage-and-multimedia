@@ -31,16 +31,7 @@ The Secret Next Door
 }
 
 
-:: P0Start [start-bg] {"position":"150,125","size":"100,100"}
-You walk down Via Zamboni, like you do every day.
-Students pass you with coffee and headphones. The walls are full of posters — concerts, rooms for rent, lost cats.
-But one poster makes you stop. It is old and faded. A woman is painted on it.
-She looks up at the sky, and she looks sad.
-
-[[Check the poster. ->P0StreetHook]]
-
-
-:: P0StreetHook [start-bg] {"position":"325,100","size":"160,120"}
+:: P0Start [start-bg] {"position":"375,125","size":"100,100"}
 <div style="text-align: center; margin: 5px 0;">
     <div style="display: inline-block; overflow: hidden;">
         <img src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/poster_donna.png" 
@@ -54,6 +45,16 @@ What do you do?
 [[Lift your phone and scan the code.->P1Threshold]]
 [[Keep walking. You have somewhere to be.->P0Walkaway]]
 (set: $unlockedCount to 0)
+
+
+:: P0StreetHook [start-bg] {"position":"125,100","size":"160,120"}
+You walk down Via Zamboni, like you do every day.
+Students pass you with coffee and headphones. The walls are full of posters — concerts, rooms for rent, lost cats.
+But one poster makes you stop. It is old and faded. A woman is painted on it.
+She looks up at the sky, and she looks sad.
+
+[[Check the poster. ->P0Start]]
+
 
 
 :: P0Walkaway [street-bg] {"position":"525,100","size":"160,120"}
