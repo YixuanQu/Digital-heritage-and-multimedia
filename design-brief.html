@@ -62,7 +62,7 @@
             <p>
                 Polyxeni Chasanai — <span class="todo">add email</span><br />
                 Kübra Topçuoğlu — kubra.topcuoglu@studio.unibo.it<br />
-                Yixuan Qu — <span class="todo">add email</span><br />
+                Yixuan Qu — yixuan.qu@studio.unibo.it<br />
                 Saya Saito — <span class="todo">add email</span>
             </p>
         </div>
@@ -377,21 +377,38 @@
         <div class="brief-block">
             <h3>6. User Flow, Interaction and Hybrid System</h3>
             <h4>6.1 General user flow</h4>
-            <div class="blank-area"></div>
+            <p>The user flow is a step-by-step representation of the actions a user takes to achieve specific tasks of awaking all the five paintings and highlighting their dark dots on Bologna map, considering all possibilities and decisions, designed to smoothly guide the visitor from external discovery through a structured, interactive gaming experience.
+The flow begins where the user initiates the experience ("Play the story"), in which the user is primarily designed as a university student walking down the via Zamboni. The first action is to "Check the poster" located on the walls. This presents the first decision point: whether to "Scan the QR code on the poster." If the user chooses to "Walk away", a later prompt to "See the poster again and scan the QR code" acts as a secondary trigger, ensuring they eventually "Enter the Pinacoteca."
+Then the user faces a decision to "Check the map of Bologna." If they choose "Yes," they are introduced to the exile map where all the dots are still dark, visually establishing the mission and creating forward curiosity. If they choose to "Skip," they bypass this context but still proceed directly to the core activity.
+The experience then transitions into the Core Game Loop, which is a repeated cycle of actions, decisions, feedback, and consequences that structures gameplay. The user must "Follow the guide to the exhibition room," "Stand in front of the painting," and "Look at the painting carefully." This observational task leads to understand the meaning of paintings, and by clicking on different choices of "Answer the question", the user gets immediate feedback.  Incorrect answers cause no punishment but just trigger a recovery loop where the user is prompted to look again at the highlights of painting and retry.
+Upon a "Correct" answer, the user proceeds to "Bring the painting back home" and then face a decision to "Set it on the map." Selecting "Yes" provides visual feedback as they "Check the new light on the map," rewarding their insightful comprehension. Skipping this step simply pushes them forward to the next painting.
+When all the five tasks are completed, the user enters the Resolution Phase, receiving the result card, which validates their effort. This opens up the social layer, presenting a decision to "Share with friends" or "Keep the secret." Finally, the user is offered an optional physical-world extension: to go to the original church. Whether they choose "Yes" or "Next time," the flow reaches the "End / Start over" terminal point, completing the hybrid experience while offering the possibility to play again this game.
+</p>
             <figure class="figure">
-                <div class="figure-box">Figure 1 — General user flow diagram [add image]</div>
-                <figcaption>Figure 1.</figcaption>
+                <div class="figure-box"><img src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/user%20experience.png"></div>
+                <figcaption>Figure 1. User Flow Diagram</figcaption>
             </figure>
 
             <h4>6.2 Swimlane flowchart: actors, responsibilities, decisions</h4>
-            <div class="blank-area"></div>
+            <p>The swimlane flowchart describes interactions between four primary components:
+(1)	User: Represents the participant, whose responsibilities span both physical and digital layers.
+(2)	Web Game: Represents the digital layer of Twine application. Its responsibilities include acting as the intermediate layer, providing the digital guide, providing photos of the painting and multiple choices for the interaction, and rendering the digital map.
+(3)	Museum: The indoor institutional space provides the physical architecture, preserving the actual paintings, and maintaining the text boards with brief interpretations for the visitors.
+(4)	Urban environment: Represents the broader urban context of Bologna, providing the external spatial anchors, including the initial triggers (posters on the walls of Via Zamboni) and the final physical destinations (the Bologna city environment and churches around the city).
+Failure States and Recovery:
+In this project, traditional punishing failure states have been intentionally excluded. As annotated in the diagram, incorrect answers in the multiple-choice questions act as intentional frictions that provide challenge and prevent the loop from becoming too simple. If the user selects a wrong answer, the system triggers a recovery loop without punishments. The user is gently redirected back to the "Observe the paintings" step. This ensures that the failure state is temporary, educational, and keeps the visitor actively engaged in the process of meaning-making.
+</p>
             <figure class="figure">
-                <div class="figure-box">Figure 2 — Swimlane flowchart [add image]</div>
-                <figcaption>Figure 2.</figcaption>
+                <div class="figure-box"><img src="https://raw.githubusercontent.com/YixuanQu/Digital-heritage-and-multimedia/main/img/swimlane_chart.png"></div>
+                <figcaption>Figure 2. Swimlane Flowchart</figcaption>
             </figure>
 
             <h4>6.3 Interaction description and categories</h4>
-            <div class="blank-area"></div>
+            <p>The project relies on hybrid experience design, combining various interaction modalities. It constantly pushes the user's attention back and forth between the screen and the real world through the following categories:
+Device-Based Interaction: The interaction is facilitated through the digital interface to make selections and read text.
+Physical Navigation: The user engages in offline embodiment, which requires the body indirectly to navigate the physical gallery spaces.
+Feedback and Interaction Fidelity: The system provides clear, immediate confirmation of an action through visual cues on the digital map.
+</p>
 
             <h4>6.4 Hybrid and technological layers</h4>
             <table class="brief-table">
@@ -399,11 +416,11 @@
                     <tr><th>Layer</th><th>Software / hardware / material</th><th>Function</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Physical layer</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Digital layer</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Museum layer</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Social layer</td><td class="empty"></td><td class="empty"></td></tr>
-                    <tr><td>Other</td><td class="empty"></td><td class="empty"></td></tr>
+                    <tr><td>Physical layer</td><td>Focuses on the material elements of the permanent exhibition of Pinacoteca, including pure material environments and material artifacts used as structural interaction anchors.</td><td>Acts as the initial trigger (street posters) and the ultimate focal point of the experience (the physical canvas paintings).</td></tr>
+                    <tr><td>Digital layer</td><td>Includes Digital Media Formats and cross-platform UI panels. Main tools applied are Twine, Figma and HTML web page.</td><td>Delivers the Twine narrative and Leaflet map without requiring downloads, relying on immediate availability and zero installation barriers.</td></tr>
+                    <tr><td>Museum layer</td><td>Integrates the physical space where the media is accessed and the original context of the heritage assets.</td><td>Provides the spatial container, the historical authority, and the walking environment for the interactive trail.</td></tr>
+                    <tr><td>Social layer</td><td>Multimedia design facilitates social communication.</td><td>Encourages social communication, turning the visitor's accomplishment into an invitation for the next student outside, calling for a re-awareness of the city public and historical memory.</td></tr>
+                
                 </tbody>
             </table>
         </div>
@@ -412,9 +429,13 @@
         <div class="brief-block">
             <h3>7. User Experience as User Journey</h3>
             <h4>7.1 User journey narrative</h4>
-            <div class="blank-area"></div>
+            <p>The journey begins with state curiosity, specifically forward curiosity, which is triggered by unpredictability or lack of desired information. For example, Giulia, our primary persona, is walking down Via Zamboni when a poster catches her eye. It speaks directly to her: "I used to live here. They took me away." Intrigued, she scans the QR code.
+Entering the museum, the design places a playful and a bit mysterious style to proceed. As she follows the digital clues to locate the physical paintings, Giulia engages in meaning-making, an active process where individuals reappraise or revise a series of events. The core loop relies on a structured reward loop: awareness of a knowledge gap leads to curiosity, followed by information-seeking behavior, the acquisition of new knowledge as a reward, and an expanded knowledge base. She looks closely at the paintings to answer the game's question. When she gets it right, the interactive map on her screen lights up. The order of the hybrid exhibition is well-designed: The first painting as the most famous and precious one in the gallery can easily attract user’s attention, the other four works are arranged chronologically, aligning with the actual guidance in physical world, in order to facilitate user journey and to avoid possible fatigue on the way.
+By the time the user finds the 5th painting, she feels a sense of completion. For the conclusion, the design uses the final output as a resolution, not just an end screen. The final screen gives her a glowing digital card, which she screenshots to share with friends. 
+After this game, the user will have a map with all the 5 churches highlighted, which could foster new curiosity to explore the historical sites that carry the city’s memory.
+</p>
             <figure class="figure">
-                <div class="figure-box">Figure 3 — User Journey Map [add image]</div>
+                <div class="figure-box"<img src=""></div>
                 <figcaption>Figure 3.</figcaption>
             </figure>
 
